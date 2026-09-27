@@ -1,0 +1,124 @@
+{
+  "_doc": "Single source of truth for the edit AND the score. All positions are in bars (0-based, 4/4). 20.5 = bar 20, beat 3. seconds = bar * beats_per_bar * 60 / bpm.",
+  "bpm": 80,
+  "beats_per_bar": 4,
+  "total_bars": 40,
+  "fps": 60,
+  "width": 1920,
+  "height": 1080,
+  "sample_rate": 48000,
+
+  "shots": [
+    {"id": "intro",        "start": 0,  "end": 2,  "grade": "intro"},
+    {"id": "silk",         "start": 2,  "end": 7,  "grade": "desert"},
+    {"id": "rome_road",    "start": 7,  "end": 9,  "grade": "dawn"},
+    {"id": "rome_port",    "start": 9,  "end": 11, "grade": "fire"},
+    {"id": "sail",         "start": 11, "end": 16, "grade": "storm"},
+    {"id": "rail_side",    "start": 16, "end": 18, "grade": "steam"},
+    {"id": "rail_wheels",  "start": 18, "end": 20, "grade": "steam"},
+    {"id": "container",    "start": 20, "end": 25, "grade": "fog"},
+    {"id": "air",          "start": 25, "end": 29, "grade": "golden"},
+    {"id": "port",         "start": 29, "end": 31, "grade": "night"},
+    {"id": "globe",        "start": 31, "end": 33, "grade": "night"},
+    {"id": "robots",       "start": 33, "end": 35, "grade": "future"},
+    {"id": "swarm",        "start": 35, "end": 37, "grade": "future"},
+    {"id": "finale",       "start": 37, "end": 40, "grade": "end"}
+  ],
+
+  "impacts": [
+    {"at": 2.0,  "strength": 0.35},
+    {"at": 7.0,  "strength": 0.5},
+    {"at": 9.0,  "strength": 0.4},
+    {"at": 11.0, "strength": 0.7, "lightning": true},
+    {"at": 13.0, "strength": 0.55, "lightning": true},
+    {"at": 14.5, "strength": 0.5, "lightning": true},
+    {"at": 15.0, "strength": 0.6, "lightning": true},
+    {"at": 16.0, "strength": 0.8},
+    {"at": 18.0, "strength": 0.7},
+    {"at": 24.0, "strength": 1.0, "clang": true},
+    {"at": 25.0, "strength": 0.8},
+    {"at": 27.0, "strength": 0.6},
+    {"at": 29.0, "strength": 0.85},
+    {"at": 31.0, "strength": 0.9},
+    {"at": 33.0, "strength": 1.0},
+    {"at": 35.0, "strength": 1.0},
+    {"at": 37.0, "strength": 1.6, "final": true}
+  ],
+
+  "risers": [
+    {"start": 19.0, "end": 20.0},
+    {"start": 23.0, "end": 24.0},
+    {"start": 28.0, "end": 29.0},
+    {"start": 32.0, "end": 33.0},
+    {"start": 35.5, "end": 36.625}
+  ],
+
+  "silences": [
+    {"start": 36.625, "end": 37.0}
+  ],
+
+  "hush": {"start": 20.0, "end": 22.0},
+
+  "titles": [
+    {"at": 0.35, "dur": 1.55, "style": "quote", "lines": ["Before anything could be made,", "it had to be moved."]},
+    {"at": 3.0,  "dur": 3.0,  "style": "card", "date": "c. 130 BCE", "title": "THE SILK ROAD", "sub": "6,400 km of caravan trail, Chang'an to the Mediterranean"},
+    {"at": 7.4,  "dur": 1.5,  "style": "card", "date": "312 BCE", "title": "VIA APPIA", "sub": "Rome will pave 80,000 km of road"},
+    {"at": 9.3,  "dur": 1.6,  "style": "card", "date": "c. 280 BCE", "title": "ALEXANDRIA", "sub": "The Pharos guides the grain fleets home"},
+    {"at": 11.5, "dur": 3.0,  "style": "card", "date": "1571", "title": "THE AGE OF SAIL", "sub": "Manila galleons close the first global trade loop"},
+    {"at": 16.3, "dur": 2.4,  "style": "card", "date": "1830", "title": "STEAM", "sub": "Liverpool & Manchester: the first intercity railway"},
+    {"at": 20.5, "dur": 1.5,  "style": "card", "date": "April 26, 1956", "title": "PORT NEWARK", "sub": ""},
+    {"at": 22.1, "dur": 1.7,  "style": "line", "lines": ["Malcolm McLean's Ideal X sails with 58 steel boxes."]},
+    {"at": 24.05,"dur": 0.93, "style": "line", "lines": ["Loading cost falls from $5.83 to 16\u00a2 a ton."]},
+    {"at": 25.5, "dur": 2.4,  "style": "card", "date": "1972", "title": "AIR FREIGHT", "sub": "A hundred tonnes across an ocean, overnight"},
+    {"at": 29.35,"dur": 1.55, "style": "card", "date": "TODAY", "title": "THE GLOBAL PORT", "sub": "More than 80% of world trade travels by sea"},
+    {"at": 31.35,"dur": 1.55, "style": "line", "lines": ["Every day, the world is carried somewhere new."]},
+    {"at": 33.3, "dur": 1.6,  "style": "card", "date": "TOMORROW", "title": "AUTONOMY", "sub": "No driver. No pilot. No pause."},
+    {"at": 35.5, "dur": 1.1,  "style": "line", "lines": ["The caravan never stopped."]},
+    {"at": 37.35,"dur": 2.65, "style": "final", "title": "THE WORLD, DELIVERED", "sub": "A HISTORY OF LOGISTICS"}
+  ],
+
+  "chords": [
+    "Dm", "Dm",
+    "Dm", "C", "Bb", "A", "Dm",
+    "Dm", "C", "Bb", "A",
+    "Dm", "Bb", "F", "C", "A",
+    "Dm", "Bb", "F", "A",
+    "Dm", "C", "Bb", "A", "Dm",
+    "Dm", "C", "Bb", "A",
+    "Bb", "F", "C", "A",
+    "Dm", "C", "Bb", "A",
+    "Dm", "Dm", "Dm"
+  ],
+
+  "intensity": [
+    0.04, 0.07,
+    0.12, 0.15, 0.18, 0.2, 0.22,
+    0.28, 0.3, 0.32, 0.35,
+    0.42, 0.45, 0.5, 0.52, 0.56,
+    0.6, 0.63, 0.66, 0.72,
+    0.08, 0.14, 0.22, 0.36, 0.7,
+    0.72, 0.74, 0.76, 0.8,
+    0.82, 0.85, 0.88, 0.9,
+    0.95, 0.97, 1.0, 1.0,
+    1.0, 0.45, 0.2
+  ],
+
+  "motif": {
+    "_doc": "4-bar phrase over the Andalusian cadence Dm-C-Bb-A. [beat, midi, beats]",
+    "notes": [
+      [0, 74, 1.5], [1.5, 76, 0.5], [2, 77, 1], [3, 81, 1],
+      [4, 79, 1.5], [5.5, 77, 0.5], [6, 76, 1], [7, 72, 1],
+      [8, 74, 1.5], [9.5, 76, 0.5], [10, 77, 1], [11, 79, 0.5], [11.5, 77, 0.5],
+      [12, 76, 3], [15, 73, 1]
+    ]
+  },
+
+  "motif_statements": [
+    {"bar": 1,  "instrument": "ney",     "transpose": -12, "notes": 4, "gain": 0.5},
+    {"bar": 2,  "instrument": "oud",     "transpose": -12, "gain": 0.8},
+    {"bar": 7,  "instrument": "horn",    "transpose": -12, "gain": 0.6},
+    {"bar": 20, "instrument": "celesta", "transpose": 0,   "gain": 0.4},
+    {"bar": 25, "instrument": "strings", "transpose": 0,   "gain": 0.75},
+    {"bar": 33, "instrument": "tutti",   "transpose": -12, "gain": 1.0}
+  ]
+}
