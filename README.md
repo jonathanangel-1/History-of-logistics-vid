@@ -13,8 +13,11 @@ and Inter), which are used for the title cards.
 sudo apt-get install -y ffmpeg python3-dev python3-cairo libcairo2-dev fonts-noto-core
 pip install --break-system-packages numpy scipy opencv-python-headless pillow pycairo
 
-# full film: renders every shot, synthesizes the score, muxes the MP4
-python3 -m logistics.render --all          # -> build/history_of_logistics.mp4
+# full film: renders every shot, synthesizes the score, muxes, encodes the delivery copy
+python3 -m logistics.render --all
+#   build/history_of_logistics_master.mp4   CRF 21 master (~345 MB; the film grain is expensive)
+#   build/history_of_logistics.mp4          two-pass 6.5 Mbit/s delivery (~100 MB)
+python3 -m logistics.render --deliver --vbitrate 10M   # re-encode the delivery copy only
 
 # score only
 python3 -m logistics.audio                 # -> build/score.wav (48 kHz float stereo)

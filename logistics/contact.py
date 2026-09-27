@@ -13,7 +13,7 @@ from logistics.cues import CueSheet, ROOT
 
 CS = CueSheet()
 BUILD = os.path.join(ROOT, "build")
-TIMES = [1.2, 12.0, 24.0, 30.0, 40.0, 50.5, 57.0, 67.0, 81.0, 88.5, 106.0, 116.0]
+TIMES = [4.0, 12.0, 24.0, 30.0, 40.0, 50.5, 57.0, 67.0, 81.0, 88.5, 108.5, 116.0]
 TW, TH, COLS, PAD = 640, 360, 4, 12
 
 

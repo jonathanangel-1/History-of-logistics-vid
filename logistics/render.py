@@ -97,6 +97,17 @@ def mux(out_path):
     print("wrote", out_path)
 
 
+def deliver(master, out_path, vbitrate):
+    """Two-pass re-encode of the master to a fixed size (the grain makes CRF output very large)."""
+    log = os.path.join(BUILD, "x264pass")
+    base = ["ffmpeg", "-y", "-loglevel", "error", "-i", master, "-c:v", "libx264", "-preset", "slow",
+            "-tune", "grain", "-b:v", vbitrate, "-maxrate", vbitrate, "-bufsize", "16M",
+            "-pix_fmt", "yuv420p", "-g", "120", "-passlogfile", log]
+    subprocess.check_call(base + ["-pass", "1", "-an", "-f", "null", os.devnull])
+    subprocess.check_call(base + ["-pass", "2", "-c:a", "copy", "-movflags", "+faststart", out_path])
+    print("wrote", out_path)
+
+
 def stills(times, outdir):
     from PIL import Image
     os.makedirs(outdir, exist_ok=True)
@@ -120,6 +131,9 @@ def main():
     ap.add_argument("--crf", type=int, default=21)
     ap.add_argument("--workers", type=int, default=os.cpu_count())
     ap.add_argument("--out", default=os.path.join(BUILD, "history_of_logistics.mp4"))
+    ap.add_argument("--master", default=os.path.join(BUILD, "history_of_logistics_master.mp4"))
+    ap.add_argument("--deliver", action="store_true")
+    ap.add_argument("--vbitrate", default="6500k")
     a = ap.parse_args()
 
     if a.stills:
@@ -134,7 +148,9 @@ def main():
         if a.all or not os.path.exists(os.path.join(BUILD, "score.wav")):
             from logistics import audio
             audio.main()
-        mux(a.out)
+        mux(a.master)
+    if a.all or a.mux or a.deliver:
+        deliver(a.master, a.out, a.vbitrate)
 
 
 if __name__ == "__main__":
