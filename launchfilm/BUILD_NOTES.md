@@ -88,7 +88,9 @@ word timings; it is not part of the pipeline and nothing it produced is in the f
 | DVIDS C-17 B-roll at 0:04 | Legible "U.S. AIR FORCE" / unit markings (DoW terms restrict insignia in commerce). Used the unmarked engine/wing angle instead; C-5 nose cropped away from its lettering. |
 | Port of Savannah hoist at 0:59 | Carrier logo (CMA CGM) is the subject of the shot. Replaced with an unbranded container lift. |
 | Long Beach package 2 picture | Carrier-branded containers dominate the frame. Only its natural sound (a container set on a chassis: the clang) is used. |
-| Savannah rail shots | Crane-maker branding across the top of frame. Cropped out (`c16`/`c9` zoomed to the lower frame). |
+| Savannah rail shots | Crane-maker branding across the top of frame. Cropped out (`c16`/`c9` zoomed to the lower frame); the 0:27 in-point (readable carrier name on a container) dropped entirely. |
+| Long Beach package 1 cranes and yard trucks (0:49, 2:57, 3:53, 5:51) and a Long Beach yard at 0:34 | Readable carrier / crane-maker / fleet names on crane booms, trucks, or a hoisted container. Replaced with the bridge vista, gate truck cropped to its unbadged side, and military container-handler shots. |
+| Port of Savannah hoisted containers (1:05-1:08) | Carrier logo readable on the container doors in the vertical crop. Not used. |
 | USDA Wando Welch Terminal clip | Static, carrier name on the hull. Not used. |
 | Apollo 11 press-site feed after liftoff | Commentary continues and the feed carries no launch roar. Roar comes from the NASA RS-25 hot-fire test (natural sound, no speech). |
 | NASA Artemis I isolated views / slow-motion liftoff audio | Commentary on the audio track. Not used for SFX. |
