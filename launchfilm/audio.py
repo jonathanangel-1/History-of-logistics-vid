@@ -131,11 +131,10 @@ def build(out_path=None, stems=False):
 
     # ---- narration: one voice, one processing chain, one level for every line
     nc = cs["narration"]
+    chain = lambda p, sr: decode_file(p, sr, af=nc["chain_af"]).mean(axis=1)
     for line in nc["lines"]:
-        p = narrate.line_path(line, nc)
-        x = decode_file(p, sr, af=nc["chain_af"])
-        x = narrate.trim(x.mean(axis=1), sr)[:, None].repeat(2, axis=1)
-        place(voice, x * db(line.get("gain_db", 0)), line["at_s"] - narrate.LEAD_S, sr)
+        for t0, x in narrate.placements(line, nc, sr, decode=chain):
+            place(voice, x[:, None].repeat(2, axis=1) * db(line.get("gain_db", 0)), t0 - narrate.LEAD_S, sr)
     active = np.abs(voice[:, 0]) > db(-50)
     voice *= db(nc["level_dbfs"]) / (np.sqrt(np.mean(voice[active] ** 2)) + 1e-9)
 

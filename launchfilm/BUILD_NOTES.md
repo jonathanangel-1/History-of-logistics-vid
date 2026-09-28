@@ -39,16 +39,36 @@ contact.py ──> out/contact_sheet_{16x9,9x16}.png
   again", a single light grain/vignette pass over everything. Optional per-shot slow push-in,
   3-frame white flash on the big downbeats, and a 2-frame chromatic glitch on two cuts in the
   final burst. The 9:16 cut uses its own per-shot crop (`c9`), not a pillarbox.
-- **Narration.** `narrate.py` voices each line with Kokoro-82M (open weights, Apache-2.0)
-  through `kokoro-onnx`, using a fixed blend of two of the model's stock male voices
-  (0.6 `am_michael` + 0.4 `am_onyx`, median pitch about 109 Hz) at 0.9x speed. It is a
-  synthetic voice, not a clone of any real person. The voice was chosen by pitch and by a
-  speech-recognition round trip on the full mix (every line transcribed back correctly over
-  the music). **A recorded human read replaces it without code changes:** put
-  `narration_recorded/<line id>.wav` (for example `n07.wav`) in the repo root, re-run
-  `--audio`, and that line uses the recording (trimmed to its first word, same placement).
-- **Type.** Inter (site font). Only the two closing lines appear as type, on black, revealed
-  word by word at the narrator's pace. End card: logo, tagline, services, "Since 2000", URL.
+- **Narration.** `narrate.py` + `tts_chatterbox.py` run a voice-over "session" with
+  Chatterbox (Resemble AI, MIT). Every line is read in several seeded takes (4 per line,
+  8 for "Volume."), and the kept take must transcribe back to exactly the script
+  (faster-whisper), sit in the narrator's pitch range (85-125 Hz median F0, pYIN), and
+  score best on UTMOS (an automatic naturalness predictor) among the takes that pass. The
+  five single words ("Data centers. Microchips. Robots. Power. Defense.") are one read,
+  split at its pauses and placed on their beats, so they keep a spoken cadence. The
+  narrator's timbre comes from a reference built in the same session: Chatterbox's own
+  stock voice reading a neutral paragraph, lowered 2.9 semitones with formants shifted.
+  It is a synthetic voice, not a recording or clone of any person, and every generated
+  file carries Resemble AI's imperceptible Perth watermark. The session is reproducible
+  (fixed seeds) and cached per line. Chatterbox pins its own torch/numpy, so it runs in
+  a separate environment named by `CHATTERBOX_PYTHON` (setup below). **A recorded human
+  read replaces it without code changes:** put `narration_recorded/<line id>.wav` (for
+  example `n07.wav`) in the repo root and re-run `--audio`. v2.1's Kokoro voice was
+  dropped after client review ("sounds like AI").
+- **Type.** Inter and Manrope (the site's faces). Only the two closing lines appear as
+  type over footage/black, revealed word by word at the narrator's pace.
+- **Closing sequence (`endcard.py`).** Built from the volumeba.com design language
+  rather than a centered card: after "Volume." the logo glides to the top-left while the
+  frame closes into the site's rounded photographic stage (22 px radius, charcoal
+  surround) over a slowed dusk-at-sea shot. Then, on the site's strong ease-out: the mono
+  eyebrow (INTERNATIONAL FREIGHT FORWARDING · SINCE 2000), the large Manrope headline
+  "Global freight. / Clear visibility." with a gold-to-cream gradient and masked line
+  reveals, the service line, a gold route that draws through the site's three gateway
+  facts (Ben Gurion Airport; Haifa & Ashdod ports; in-house brokerage at the ports) with
+  the gold square riding its head, the coverage line (Israel · U.S. · worldwide) and a
+  smoked-glass URL button with the site's arrow tile. Every string is a live-site claim
+  and lives in `endcard` in the cue sheet; the URL is still one field. The 9:16 version
+  stacks the same elements inside the 250 px safe zones with a vertical route.
 - **Logo.** `logo.py` rasterizes `brand/volume-logo.svg` itself (the file only uses absolute
   M/H/V/L/Q/Z paths, a rounded rect and translate/scale transforms). Letterforms render cream
   `#eee9de`, the square stays gold `#baa88a`. Nothing is redrawn. On the final hit the gold
@@ -70,7 +90,13 @@ contact.py ──> out/contact_sheet_{16x9,9x16}.png
 
 ```bash
 sudo apt-get install -y ffmpeg fonts-inter        # or drop Inter + JetBrains Mono TTFs into ./fonts/
-pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml soundfile kokoro-onnx
+pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml soundfile
+
+# narration engine in its own environment (it pins torch 2.6 / numpy < 2)
+python3 -m venv ~/cbvenv
+~/cbvenv/bin/pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+~/cbvenv/bin/pip install chatterbox-tts faster-whisper soundfile
+export CHATTERBOX_PYTHON=~/cbvenv/bin/python
 
 python3 -m launchfilm.render --all --artifacts /opt/cursor/artifacts   # everything
 python3 -m launchfilm.render --fetch                                   # downloads only
@@ -92,8 +118,8 @@ and `CREDITS.*`. Creators are credited as institutions / units (DVIDS license li
 with the videographer's name replaced by "..."); the only personal name in the credits is the
 composer, whose credit line is required by the CC BY 4.0 license. CC0 contributors are
 credited as "Wikimedia Commons contributor" with the file URL (CC0 requires no attribution).
-The narration engine (Kokoro-82M weights, Apache-2.0; kokoro-onnx runtime, MIT) is credited
-as a source, and every narration line has its own row marked "synthetic voice".
+The narration engine (Chatterbox, MIT) is credited as a source, and every narration line
+has its own row marked "synthetic voice". Manrope is under the SIL Open Font License.
 
 v2.0 used public-domain soundbites (President Kennedy at Rice University, 1962; Apollo 11
 Launch Control, 1969) as the voice track. Client review: one old speech reused across the

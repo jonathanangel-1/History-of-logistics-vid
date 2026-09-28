@@ -2,7 +2,7 @@
  "_doc": "Single source of truth for picture and sound. Film positions are bars (0-based, 4/4, 128 BPM: 1 bar = 1.875 s, 1 beat = 0.46875 s). Keys ending in _s are seconds. Shot `in` is seconds in the ORIGINAL source file. c16/c9 = [center_x, center_y, zoom] of the crop inside the source's active area (zoom 1 = largest box of the output aspect). A shot runs until the next shot's `at`.",
  "bpm": 128,
  "beats_per_bar": 4,
- "total_bars": 32,
+ "total_bars": 34,
  "fps": 24,
  "sample_rate": 48000,
  "shots": [
@@ -550,7 +550,7 @@
    ]
   },
   {
-   "at": 18.625,
+   "at": 18.5,
    "src": "dv_1010655",
    "in": 13.8,
    "look": "full",
@@ -566,7 +566,7 @@
    ]
   },
   {
-   "at": 19.125,
+   "at": 19.25,
    "src": "dv_savannah_gate",
    "in": 229.0,
    "look": "full",
@@ -582,7 +582,7 @@
    ]
   },
   {
-   "at": 19.5,
+   "at": 19.75,
    "src": "dv_844294",
    "in": 29.0,
    "look": "night",
@@ -884,12 +884,19 @@
    "at": 28.0,
    "src": "brand_bg",
    "bg": "dv_sealift_dusk",
-   "in": 14.5,
-   "opacity": 0.16
-  },
-  {
-   "at": 29.5,
-   "src": "charcoal"
+   "in": 11.8,
+   "push": 0.07,
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.62,
+    0.5,
+    1.0
+   ],
+   "speed": 0.35
   }
  ],
  "titles": [
@@ -922,8 +929,8 @@
    {
     "at": 18,
     "src_bar": 74,
-    "bars": 14,
-    "fade_out_s": 1.4
+    "bars": 16,
+    "fade_out_s": 2.4
    }
   ]
  },
@@ -1002,25 +1009,54 @@
   "logo_w_9x16": 760,
   "square_frames": 4,
   "letters_delay_frames": 6,
-  "letters_frames": 16
+  "letters_frames": 16,
+  "bg_opacity": 0.16
  },
  "endcard": {
-  "at": 29.5,
-  "tagline": "Global freight. Clear visibility.",
-  "services": "Air \u00b7 Ocean \u00b7 Customs \u00b7 Delivery",
-  "since": "Since 2000",
+  "at": 29.0,
+  "eyebrow": "INTERNATIONAL FREIGHT FORWARDING \u00b7 SINCE 2000",
+  "headline": [
+   "Global freight.",
+   "Clear visibility."
+  ],
+  "services_line": "Air, ocean, customs and white-glove delivery.",
+  "nodes": [
+   {
+    "label": "01 \u00b7 AIR GATEWAY",
+    "name": "Ben Gurion Airport"
+   },
+   {
+    "label": "02 \u00b7 OCEAN GATEWAYS",
+    "name": "Haifa & Ashdod ports"
+   },
+   {
+    "label": "03 \u00b7 CUSTOMS AT THE PORTS",
+    "name": "In-house brokerage"
+   }
+  ],
+  "coverage": "ISRAEL \u00b7 U.S. \u00b7 WORLDWIDE",
   "url": "volumeba.com"
  },
  "narration": {
-  "model": "tts_kokoro_model",
-  "voices": "tts_kokoro_voices",
-  "voice_mix": {
-   "am_michael": 0.6,
-   "am_onyx": 0.4
-  },
-  "speed": 0.9,
-  "lang": "en-us",
+  "model": "tts_chatterbox",
   "recorded_dir": "narration_recorded",
+  "chatterbox": {
+   "seed": 7,
+   "takes": 4,
+   "exaggeration": 0.45,
+   "cfg_weight": 0.3,
+   "temperature": 0.8,
+   "reference_text": "Every great journey begins with a single decision. We cross oceans, we build cities, and we carry the weight of the world on our shoulders. And when the work is done, we look to the horizon, and we go again.",
+   "reference_seed": 7,
+   "reference_pitch": 0.84,
+   "f0_range_hz": [
+    85,
+    125
+   ],
+   "f0_target_hz": 102
+  },
+  "chain_af": "highpass=f=70,equalizer=f=140:t=q:w=0.9:g=2.5,equalizer=f=320:t=q:w=1.2:g=-1.5,equalizer=f=3300:t=q:w=1.4:g=2.5,deesser=i=0.35,acompressor=threshold=-22dB:ratio=3.5:attack=4:release=90:makeup=3",
+  "level_dbfs": -17.0,
   "lines": [
    {
     "id": "n01",
@@ -1064,28 +1100,14 @@
    },
    {
     "id": "n09",
-    "at_s": 23.44,
-    "text": "Data centers."
-   },
-   {
-    "id": "n10",
-    "at_s": 24.84,
-    "text": "Microchips."
-   },
-   {
-    "id": "n11",
-    "at_s": 26.25,
-    "text": "Robots."
-   },
-   {
-    "id": "n12",
-    "at_s": 27.19,
-    "text": "Power."
-   },
-   {
-    "id": "n13",
-    "at_s": 28.13,
-    "text": "Defense."
+    "text": "Data centers. Microchips. Robots. Power. Defense.",
+    "split_at_s": [
+     23.44,
+     24.84,
+     26.25,
+     27.19,
+     28.13
+    ]
    },
    {
     "id": "n14",
@@ -1099,8 +1121,12 @@
    },
    {
     "id": "n16",
-    "at_s": 34.9,
-    "text": "Across oceans. Through borders. On time."
+    "text": "Across oceans. Through borders. On time.",
+    "split_at_s": [
+     34.72,
+     36.1,
+     37.0
+    ]
    },
    {
     "id": "n17",
@@ -1129,16 +1155,13 @@
    },
    {
     "id": "n22",
-    "at_s": 50.85,
-    "text": "Somebody has to ship it."
-   },
-   {
-    "id": "n23",
-    "at_s": 52.97,
-    "text": "Volume."
+    "text": "Somebody has to ship it. Volume.",
+    "split_at_s": [
+     50.85,
+     52.97
+    ],
+    "takes": 6
    }
-  ],
-  "chain_af": "highpass=f=70,equalizer=f=140:t=q:w=0.9:g=2.5,equalizer=f=320:t=q:w=1.2:g=-1.5,equalizer=f=3300:t=q:w=1.4:g=2.5,deesser=i=0.35,acompressor=threshold=-22dB:ratio=3.5:attack=4:release=90:makeup=3",
-  "level_dbfs": -17.0
+  ]
  }
 }

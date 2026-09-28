@@ -12,7 +12,7 @@ WORK = CACHE / "work"
 OUT = ROOT / "out"
 
 FONT_DIRS = [Path("/usr/share/fonts"), Path("/usr/local/share/fonts"), Path.home() / ".fonts",
-             Path.home() / ".local/share/fonts", ROOT / "fonts"]
+             Path.home() / ".local/share/fonts", ROOT / "fonts", SRC_DIR]
 
 
 def find_font(names):
@@ -36,6 +36,7 @@ FONTS = {
     "sans_medium": lambda: find_font(["Inter-Medium.ttf", "Inter-Medium.otf", "Inter-Regular.ttf"]),
     "sans_semibold": lambda: find_font(["Inter-SemiBold.ttf", "Inter-SemiBold.otf", "Inter-Medium.ttf"]),
     "mono": lambda: find_font(["JetBrainsMono-Regular.ttf", "DejaVuSansMono.ttf"]),
+    "display": lambda: find_font(["font_manrope.ttf", "Manrope[wght].ttf", "Manrope-VariableFont_wght.ttf"]),
 }
 
 PALETTE = {

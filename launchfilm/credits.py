@@ -2,9 +2,7 @@
 import csv
 import re
 
-import soundfile as sf
-
-from launchfilm import narrate
+from launchfilm import audio, narrate
 from launchfilm.config import PKG, Cues, load_sources
 
 
@@ -50,13 +48,12 @@ def rows():
             else f"picture ({s.get('look', 'full')} grade)"
         add("footage", sid, s["in"], s["in"] + (t1 - t0) * speed, t0, t1, note)
     nc = cs["narration"]
+    dec = lambda p, sr: audio.decode_file(p, sr).mean(axis=1)
     for line in nc["lines"]:
-        d = sf.info(str(narrate.line_path(line, nc))).duration - narrate.LEAD_S
-        add("narration", nc["voices"], 0.0, d, line["at_s"], line["at_s"] + d,
-            f"narration line {line['id']} (synthetic voice): \u201c{line['text']}\u201d")
-    first, last = nc["lines"][0]["at_s"], nc["lines"][-1]["at_s"]
-    add("narration", nc["model"], 0.0, 0.0, first, last,
-        "text-to-speech engine that voiced every narration line")
+        for t0, x in narrate.placements(line, nc, decode=dec):
+            d = len(x) / 48000 - narrate.LEAD_S
+            add("narration", nc["model"], 0.0, d, t0, t0 + d,
+                f"narration line {line['id']} (synthetic voice): \u201c{line['text']}\u201d")
     m = cs["music"]
     ms = src[m["src"]]
     bar = 4 * 60.0 / ms["bpm"]

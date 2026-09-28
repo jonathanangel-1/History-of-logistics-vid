@@ -1,5 +1,5 @@
 """Frame renderer: real footage cut on the cue sheet grid, light grade + grain,
-closing type, logo reveal and end card. One pass per format."""
+closing type, logo reveal and the closing sequence (endcard.py). One pass per format."""
 import json
 import subprocess
 from functools import lru_cache
@@ -7,6 +7,7 @@ from functools import lru_cache
 import cv2
 import numpy as np
 
+from launchfilm import endcard
 from launchfilm import text as T
 from launchfilm.config import FORMATS, PALETTE, Cues, load_sources, src_path
 from launchfilm.logo import logo_masks
@@ -221,37 +222,6 @@ def compose_logo(img, cs, fmt, t, cx, cy, width, t_hit, alpha=1.0):
     return img
 
 
-def draw_endcard(img, cs, fmt, t):
-    H, W = img.shape[:2]
-    ec = cs["endcard"]
-    t0 = cs.when(ec)
-    k = (t - t0) * cs.fps
-    a = lambda d: float(np.clip((k - d) / 8.0, 0, 1))
-    v = fmt == "9x16"
-    lw = 420 if not v else 520
-    L, S, _ = logo_masks(lw)
-    lh = L.shape[0]
-    cy_logo = H * (0.34 if not v else 0.38)
-    x0, y0 = int(W / 2 - lw / 2), int(cy_logo - lh / 2)
-    reg = img[y0:y0 + lh, x0:x0 + lw]
-    for m, col in ((L, rgbf("cream")), (S, rgbf("gold"))):
-        al = (m * a(0))[..., None]
-        reg[:] = reg * (1 - al) + col * al
-    rows = [(ec["tagline"], "caption", "cream", 0.52 if not v else 0.52, 4),
-            (ec["services"], "caption_small", "gold_bright", 0.61 if not v else 0.585, 8),
-            (ec["since"], "label_big", "gold", 0.675 if not v else 0.63, 12),
-            (ec["url"], "url", "cream", 0.80 if not v else 0.72, 16)]
-    for txt, style, col, fy, d in rows:
-        st = {"caption_small": "caption", "url": "caption"}.get(style, style)
-        rgba = T.render_text(txt, st, fmt, W, color=col)
-        if style == "caption_small":
-            rgba = cv2.resize(rgba, None, fx=0.72, fy=0.72, interpolation=cv2.INTER_AREA)
-        if style == "url":
-            rgba = cv2.resize(rgba, None, fx=0.9, fy=0.9, interpolation=cv2.INTER_AREA)
-        T.composite(img, rgba, W / 2, H * fy, a(d), drop_shadow=False)
-    return img
-
-
 # ------------------------------------------------------------------ main loop
 def shot_table(cs):
     shots = cs["shots"]
@@ -271,7 +241,6 @@ def render(fmt, out_path, audio=None, only_frames=None, still_dir=None):
     rng = np.random.default_rng(3)
     charcoal = rgbf("charcoal")
     t_hit = cs.when(cs["reveal"])
-    t_end = cs.when(cs["endcard"])
     enc = None
     if only_frames is None:
         cmd = ["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
@@ -294,8 +263,8 @@ def render(fmt, out_path, audio=None, only_frames=None, still_dir=None):
         reader = None
         n = f1 - f0
         if src == "brand_bg":
-            reader = ShotReader({"src": shot["bg"], "in": shot["in"], "look": "desat"}, fmt, W, H,
-                                cs.fps, n, sources)
+            bg = {k: v for k, v in shot.items() if k in ("in", "c16", "c9", "push")}
+            reader = ShotReader(dict(bg, src=shot["bg"]), fmt, W, H, cs.fps, n, sources)
         elif src not in ("black", "charcoal"):
             reader = ShotReader(shot, fmt, W, H, cs.fps, n, sources)
         for fi in range(f0, f1):
@@ -311,9 +280,7 @@ def render(fmt, out_path, audio=None, only_frames=None, still_dir=None):
                 img = np.empty((H, W, 3), np.float32)
                 img[:] = charcoal
             elif src == "brand_bg":
-                l = (img @ np.float32([0.299, 0.587, 0.114]))[..., None]
-                img = charcoal + (l * 0.9 + img * 0.1 - charcoal) * shot["opacity"]
-                img = img.astype(np.float32)
+                img = endcard.compose(look.apply(img, "full", fi), cs, fmt, t, t_hit, charcoal)
             else:
                 img = look.apply(img, shot.get("look", "full"), fi)
                 if shot.get("glitch"):
@@ -324,12 +291,6 @@ def render(fmt, out_path, audio=None, only_frames=None, still_dir=None):
             footage = reader is not None and src != "brand_bg"
             img = np.clip(img, 0, 1).astype(np.float32)
             img = draw_titles(img, cs, fmt, t, footage)
-            if t_hit <= t < t_end:
-                cy = H / 2 if fmt == "16x9" else H * 0.47
-                wl = cs["reveal"]["logo_w_16x9" if fmt == "16x9" else "logo_w_9x16"]
-                img = compose_logo(img, cs, fmt, t, W / 2, cy, wl, t_hit)
-            elif t >= t_end:
-                img = draw_endcard(img, cs, fmt, t)
             out = (np.clip(img, 0, 1) * 255 + 0.5).astype(np.uint8)
             if enc is not None:
                 enc.stdin.write(out.tobytes())

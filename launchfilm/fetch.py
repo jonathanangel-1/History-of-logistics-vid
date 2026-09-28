@@ -43,7 +43,7 @@ def fetch(only=None):
     SRC_DIR.mkdir(parents=True, exist_ok=True)
     sources = load_sources()
     for sid, s in sources.items():
-        if only and sid not in only:
+        if (only and sid not in only) or s.get("fetch") is False:
             continue
         dest = src_path(sid, sources)
         if dest.exists() and dest.stat().st_size > 0:

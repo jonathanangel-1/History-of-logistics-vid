@@ -2,18 +2,19 @@
 
 A 60-second launch film for Volume built from real, license-safe footage (Library of
 Congress early films, NASA, DVIDS), one narrator and a CC BY 4.0 music track, cut on a
-single 128 BPM cue sheet. The narration is voiced by an open-weight text-to-speech model
-(Kokoro-82M, Apache-2.0) and can be swapped for a recorded human read by dropping WAVs into
-`narration_recorded/`. Nothing in the picture is generated: no AI imagery, no procedural
+single 128 BPM cue sheet. The narration is voiced by an open text-to-speech model
+(Chatterbox, MIT; best of several takes per line) and can be swapped for a recorded human
+read by dropping WAVs into `narration_recorded/`. Nothing in the picture is generated: no AI imagery, no procedural
 graphics beyond type and the client's own logo file.
 
 ```bash
 sudo apt-get install -y ffmpeg fonts-inter
-pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml soundfile kokoro-onnx
+pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml soundfile
+# narration engine: see launchfilm/BUILD_NOTES.md (separate env, CHATTERBOX_PYTHON)
 python3 -m launchfilm.render --all        # fetch sources, mix, render 16:9 + 9:16, credits, contact sheets
 ```
 
-Outputs land in `out/` (git-ignored): `volume_launch_16x9_1080p.mp4` (1920x1080) and
+Outputs land in `out/` (git-ignored): `volume_launch_16x9_1080p.mp4` (1920x1080, 63.75 s) and
 `volume_launch_9x16_1080x1920.mp4` (1080x1920), 24 fps H.264 High + AAC 48 kHz, mixed to
 -14 LUFS / -1 dBTP. Large media is never committed; `launchfilm/sources.yaml` lists every
 clip's URL and quoted license, and the render downloads them into `cache/`.
