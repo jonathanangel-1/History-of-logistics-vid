@@ -336,22 +336,13 @@ Include this line in the post text or description wherever the film is published
 - rights statement: NASA Image and Video Library, NASA media usage guidelines: "NASA content - images, audio, video, and computer files used in the rendition of 3-dimensional models ... - generally are not subject to copyright in the United States." Work of the U.S. federal government (17 U.S.C. 105).
 - accessed: 2026-09-28
 
-### Kokoro-82M text-to-speech model (ONNX export, kokoro-v1.0.onnx) (2025)
+### Chatterbox text-to-speech model (stock voice; narrator timbre derived from it) (2025)
 
-- id: `tts_kokoro_model`
-- creator / collection: Kokoro-82M (hexgrad); ONNX export and runtime by the kokoro-onnx project
-- item page: https://huggingface.co/hexgrad/Kokoro-82M
-- license: Apache-2.0 (model weights); kokoro-onnx runtime MIT
-- rights statement: Model card: "license: apache-2.0" ... "With Apache-licensed weights, Kokoro can be deployed anywhere from production environments to personal projects." ... "This is an Apache-licensed model, and Kokoro has been deployed in numerous projects and commercial APIs." Runtime: kokoro-onnx, "MIT License".
-- accessed: 2026-09-28
-
-### Kokoro-82M stock voice styles (voices-v1.0.bin); narrator = 0.6 am_michael + 0.4 am_onyx (2025)
-
-- id: `tts_kokoro_voices`
-- creator / collection: Kokoro-82M (hexgrad); packaged by the kokoro-onnx project
-- item page: https://huggingface.co/hexgrad/Kokoro-82M
-- license: Apache-2.0
-- rights statement: Distributed with the Apache-2.0 Kokoro-82M release (model card: "license: apache-2.0"). Stock voices of the model, not a clone of any real person.
+- id: `tts_chatterbox`
+- creator / collection: Resemble AI
+- item page: https://huggingface.co/ResembleAI/chatterbox
+- license: MIT
+- rights statement: Model card: "license: mit". Repository LICENSE: "MIT License ... Copyright (c) 2025 Resemble AI". Every generated file carries Resemble AI's imperceptible Perth watermark, marking the narration as synthetic.
 - accessed: 2026-09-28
 
 ### Rynos Theme (2016)
@@ -405,88 +396,89 @@ Include this line in the post text or description wherever the film is published
 |---|---|---|---|---|---|
 | 1 | footage | `loc_san_pedro` | 01:16.600-01:18.475 | 00:00.000-00:01.875 | picture (bw grade) |
 | 2 | music | `mus_rynos` | 01:30.035-02:03.785 | 00:00.000-00:33.750 | music bed (track bars 48-66) |
-| 3 | narration | `tts_kokoro_voices` | 00:00.000-00:02.470 | 00:00.470-00:02.940 | narration line n01 (synthetic voice): “Every time the world built something big,” |
-| 4 | narration | `tts_kokoro_model` | 00:00.000-00:00.000 | 00:00.470-00:52.970 | text-to-speech engine that voiced every narration line |
-| 5 | footage | `loc_san_pedro` | 02:19.000-02:20.172 | 00:01.875-00:03.047 | picture (bw grade) |
-| 6 | footage | `loc_klondike_baggage` | 00:17.500-00:19.609 | 00:03.047-00:05.156 | picture (bw grade) |
-| 7 | narration | `tts_kokoro_voices` | 00:00.000-00:01.660 | 00:03.050-00:04.710 | narration line n02 (synthetic voice): “somebody had to move it.” |
-| 8 | sfx | `sfx_steam_whistle` | 00:02.500-00:05.800 | 00:05.000-00:08.300 | sound effect / natural sound |
-| 9 | sfx | `sfx_steam_loco` | 00:30.000-00:37.000 | 00:05.100-00:12.100 | sound effect / natural sound |
-| 10 | footage | `loc_freight_train` | 00:24.000-00:25.172 | 00:05.156-00:06.328 | picture (bw grade) |
-| 11 | narration | `tts_kokoro_voices` | 00:00.000-00:01.900 | 00:05.160-00:07.060 | narration line n03 (synthetic voice): “Rails, across a continent.” |
-| 12 | footage | `loc_phila_express` | 00:16.300-00:17.472 | 00:06.328-00:07.500 | picture (bw grade) |
-| 13 | sfx | `sfx_ship_horn` | 00:12.300-00:17.200 | 00:07.350-00:12.250 | sound effect / natural sound |
-| 14 | footage | `loc_teutonic` | 00:40.500-00:41.906 | 00:07.500-00:08.906 | picture (bw grade) |
-| 15 | narration | `tts_kokoro_voices` | 00:00.000-00:01.850 | 00:07.500-00:09.350 | narration line n04 (synthetic voice): “Steam, across the ocean.” |
-| 16 | footage | `loc_storm_sea` | 00:23.200-00:24.137 | 00:08.906-00:09.844 | picture (bw grade) |
-| 17 | narration | `tts_kokoro_voices` | 00:00.000-00:02.090 | 00:09.840-00:11.930 | narration line n05 (synthetic voice): “Then we put the world in a box,” |
-| 18 | footage | `dv_container_move` | 01:57.000-01:58.406 | 00:09.844-00:11.250 | picture (desat grade) |
-| 19 | footage | `dv_container_move` | 01:04.000-01:04.703 | 00:11.250-00:11.953 | picture (desat grade) |
-| 20 | sfx | `dv_longbeach_b` | 04:58.950-05:00.600 | 00:11.250-00:12.900 | sound effect / natural sound |
-| 21 | footage | `dv_c17_takeoff` | 03:04.000-03:05.641 | 00:11.953-00:13.594 | picture (desat grade) |
-| 22 | sfx | `dv_c5_takeoff` | 02:40.000-02:48.000 | 00:11.953-00:19.953 | sound effect / natural sound |
-| 23 | narration | `tts_kokoro_voices` | 00:00.000-00:01.410 | 00:12.000-00:13.410 | narration line n06 (synthetic voice): “and gave it wings.” |
-| 24 | footage | `dv_c5_takeoff` | 00:42.000-00:43.406 | 00:13.594-00:15.000 | picture (desat grade) |
-| 25 | footage | `nasa_michoud_apollo` | 01:27.000-01:28.406 | 00:15.000-00:16.406 | picture (desat grade) |
-| 26 | narration | `tts_kokoro_voices` | 00:00.000-00:01.950 | 00:15.230-00:17.180 | narration line n07 (synthetic voice): “Even the Moon had to be shipped.” |
-| 27 | footage | `nasa_crawler1964` | 08:28.000-08:29.406 | 00:16.406-00:17.812 | picture (desat grade) |
-| 28 | footage | `nasa_a11_70mm` | 00:08.000-00:09.406 | 00:17.812-00:19.219 | picture (launch grade) |
-| 29 | sfx | `sfx_rs25` | 00:10.800-00:15.400 | 00:17.812-00:22.412 | sound effect / natural sound |
-| 30 | footage | `nasa_a11_70mm` | 00:20.500-00:21.438 | 00:19.219-00:20.156 | picture (launch grade) |
-| 31 | footage | `nasa_a11_70mm` | 00:34.000-00:35.406 | 00:20.156-00:21.562 | picture (launch grade) |
-| 32 | narration | `tts_kokoro_voices` | 00:00.000-00:01.690 | 00:21.560-00:23.250 | narration line n08 (synthetic voice): “Now, we're building again.” |
-| 33 | footage | `nasa_maf_cs34_prod` | 00:57.000-00:58.875 | 00:21.562-00:23.438 | picture (full grade) |
-| 34 | footage | `nasa_arc_supercomp` | 01:18.000-01:18.938 | 00:23.438-00:24.375 | picture (full grade) |
-| 35 | narration | `tts_kokoro_voices` | 00:00.000-00:01.300 | 00:23.440-00:24.740 | narration line n09 (synthetic voice): “Data centers.” |
-| 36 | footage | `dv_1011605` | 01:13.000-01:13.469 | 00:24.375-00:24.844 | picture (night grade) |
-| 37 | narration | `tts_kokoro_voices` | 00:00.000-00:01.220 | 00:24.840-00:26.060 | narration line n10 (synthetic voice): “Microchips.” |
-| 38 | footage | `dv_936659` | 00:27.000-00:27.938 | 00:24.844-00:25.781 | picture (full grade) |
-| 39 | footage | `dv_936659` | 00:31.400-00:31.869 | 00:25.781-00:26.250 | picture (full grade) |
-| 40 | footage | `dv_823372` | 01:41.000-01:41.469 | 00:26.250-00:26.719 | picture (full grade) |
-| 41 | narration | `tts_kokoro_voices` | 00:00.000-00:01.052 | 00:26.250-00:27.302 | narration line n11 (synthetic voice): “Robots.” |
-| 42 | footage | `nasa_react_print` | 00:33.000-00:33.469 | 00:26.719-00:27.188 | picture (full grade) |
-| 43 | footage | `dv_910394` | 00:08.500-00:08.969 | 00:27.188-00:27.656 | picture (full grade) |
-| 44 | narration | `tts_kokoro_voices` | 00:00.000-00:00.720 | 00:27.190-00:27.910 | narration line n12 (synthetic voice): “Power.” |
-| 45 | footage | `dv_853281` | 01:40.000-01:40.469 | 00:27.656-00:28.125 | picture (full grade) |
-| 46 | footage | `dv_848006` | 00:16.000-00:16.938 | 00:28.125-00:29.062 | picture (full grade) |
-| 47 | narration | `tts_kokoro_voices` | 00:00.000-00:00.950 | 00:28.130-00:29.080 | narration line n13 (synthetic voice): “Defense.” |
-| 48 | footage | `dv_943091` | 04:11.000-04:11.938 | 00:29.062-00:30.000 | picture (full grade) |
-| 49 | footage | `nasa_maf_reel2022` | 00:26.000-00:26.938 | 00:30.000-00:30.938 | picture (full grade) |
-| 50 | narration | `tts_kokoro_voices` | 00:00.000-00:02.100 | 00:30.200-00:32.300 | narration line n14 (synthetic voice): “The biggest build of our lifetime.” |
-| 51 | footage | `nasa_maf_reel2022` | 01:43.000-01:43.938 | 00:30.938-00:31.875 | picture (full grade) |
-| 52 | footage | `nasa_art3_cs_waterway` | 01:00.000-01:00.469 | 00:31.875-00:32.344 | picture (full grade) |
-| 53 | footage | `nasa_guppy2023` | 01:28.000-01:28.938 | 00:32.344-00:33.281 | picture (full grade) |
-| 54 | narration | `tts_kokoro_voices` | 00:00.000-00:02.070 | 00:32.400-00:34.470 | narration line n15 (synthetic voice): “And every piece of it has to move.” |
-| 55 | footage | `dv_848006` | 01:20.000-01:20.938 | 00:33.281-00:34.219 | picture (full grade) |
-| 56 | music | `mus_rynos` | 02:18.785-02:45.035 | 00:33.750-01:00.000 | music bed (track bars 74-88) |
-| 57 | footage | `dv_savannah_port` | 06:50.000-06:50.703 | 00:34.219-00:34.922 | picture (night grade) |
-| 58 | narration | `tts_kokoro_voices` | 00:00.000-00:02.770 | 00:34.900-00:37.670 | narration line n16 (synthetic voice): “Across oceans. Through borders. On time.” |
-| 59 | footage | `dv_1010655` | 00:13.800-00:14.738 | 00:34.922-00:35.859 | picture (full grade) |
-| 60 | footage | `dv_savannah_gate` | 03:49.000-03:49.703 | 00:35.859-00:36.562 | picture (full grade) |
-| 61 | footage | `dv_844294` | 00:29.000-00:29.938 | 00:36.562-00:37.500 | picture (night grade) |
-| 62 | footage | `dv_844294` | 04:40.000-04:41.406 | 00:37.500-00:38.906 | picture (night grade) |
-| 63 | narration | `tts_kokoro_voices` | 00:00.000-00:01.860 | 00:37.730-00:39.590 | narration line n17 (synthetic voice): “This isn't just freight anymore.” |
-| 64 | footage | `dv_916015` | 00:03.800-00:04.503 | 00:38.906-00:39.609 | picture (full grade) |
-| 65 | narration | `tts_kokoro_voices` | 00:00.000-00:01.260 | 00:39.600-00:40.860 | narration line n18 (synthetic voice): “It's the mission.” |
-| 66 | footage | `dv_sealift_dusk` | 00:11.600-00:13.241 | 00:39.609-00:41.250 | picture (full grade) |
-| 67 | footage | `dv_longbeach_a` | 02:17.000-02:17.938 | 00:41.250-00:42.188 | picture (full grade) |
-| 68 | narration | `tts_kokoro_voices` | 00:00.000-00:02.010 | 00:41.500-00:43.510 | narration line n19 (synthetic voice): “And logistics has to step up.” |
-| 69 | footage | `dv_822436` | 00:16.000-00:16.938 | 00:42.188-00:43.125 | picture (full grade) |
-| 70 | footage | `nasa_rs25_2018` | 00:30.000-00:30.703 | 00:43.125-00:43.828 | picture (full grade) |
-| 71 | sfx | `sfx_rs25` | 00:20.000-00:22.500 | 00:43.125-00:45.625 | sound effect / natural sound |
-| 72 | narration | `tts_kokoro_voices` | 00:00.000-00:01.970 | 00:43.800-00:45.770 | narration line n20 (synthetic voice): “Bigger. Faster. Built for it.” |
-| 73 | footage | `dv_c5_takeoff` | 02:35.000-02:35.703 | 00:43.828-00:44.531 | picture (full grade) |
-| 74 | footage | `dv_c17_takeoff` | 00:52.000-00:52.469 | 00:44.531-00:45.000 | picture (full grade) |
-| 75 | footage | `nasa_maf_reel2022` | 11:20.000-11:20.938 | 00:45.000-00:45.938 | picture (full grade) |
-| 76 | footage | `dv_savannah_cargo` | 02:50.000-02:50.469 | 00:45.938-00:46.406 | picture (full grade) |
-| 77 | footage | `dv_1011605` | 01:44.500-01:44.969 | 00:46.406-00:46.875 | picture (night grade) |
-| 78 | footage | `nasa_maf_reel2022` | 04:05.000-04:05.469 | 00:46.875-00:47.344 | picture (full grade) |
-| 79 | footage | `dv_936659` | 00:11.000-00:11.469 | 00:47.344-00:47.812 | picture (full grade) |
-| 80 | footage | `dv_848006` | 02:24.000-02:24.234 | 00:47.812-00:48.047 | picture (full grade) |
-| 81 | footage | `dv_1010655` | 02:31.600-02:31.834 | 00:48.047-00:48.281 | picture (full grade) |
-| 82 | footage | `dv_container_move` | 02:10.000-02:10.234 | 00:48.281-00:48.516 | picture (full grade) |
-| 83 | footage | `nasa_a11_70mm` | 00:42.000-00:42.234 | 00:48.516-00:48.750 | picture (launch grade) |
-| 84 | narration | `tts_kokoro_voices` | 00:00.000-00:01.690 | 00:49.050-00:50.740 | narration line n21 (synthetic voice): “Software ate the world.” |
-| 85 | narration | `tts_kokoro_voices` | 00:00.000-00:01.590 | 00:50.850-00:52.440 | narration line n22 (synthetic voice): “Somebody has to ship it.” |
-| 86 | footage | `dv_sealift_dusk` | 00:14.500-00:17.312 | 00:52.500-00:55.312 | picture, low-opacity background under the logo reveal |
-| 87 | narration | `tts_kokoro_voices` | 00:00.000-00:01.020 | 00:52.970-00:53.990 | narration line n23 (synthetic voice): “Volume.” |
+| 3 | narration | `tts_chatterbox` | 00:00.000-00:02.390 | 00:00.470-00:02.860 | narration line n01 (synthetic voice): “Every time the world built something big,” |
+| 4 | footage | `loc_san_pedro` | 02:19.000-02:20.172 | 00:01.875-00:03.047 | picture (bw grade) |
+| 5 | footage | `loc_klondike_baggage` | 00:17.500-00:19.609 | 00:03.047-00:05.156 | picture (bw grade) |
+| 6 | narration | `tts_chatterbox` | 00:00.000-00:01.390 | 00:03.050-00:04.440 | narration line n02 (synthetic voice): “somebody had to move it.” |
+| 7 | sfx | `sfx_steam_whistle` | 00:02.500-00:05.800 | 00:05.000-00:08.300 | sound effect / natural sound |
+| 8 | sfx | `sfx_steam_loco` | 00:30.000-00:37.000 | 00:05.100-00:12.100 | sound effect / natural sound |
+| 9 | footage | `loc_freight_train` | 00:24.000-00:25.172 | 00:05.156-00:06.328 | picture (bw grade) |
+| 10 | narration | `tts_chatterbox` | 00:00.000-00:01.990 | 00:05.160-00:07.150 | narration line n03 (synthetic voice): “Rails, across a continent.” |
+| 11 | footage | `loc_phila_express` | 00:16.300-00:17.472 | 00:06.328-00:07.500 | picture (bw grade) |
+| 12 | sfx | `sfx_ship_horn` | 00:12.300-00:17.200 | 00:07.350-00:12.250 | sound effect / natural sound |
+| 13 | footage | `loc_teutonic` | 00:40.500-00:41.906 | 00:07.500-00:08.906 | picture (bw grade) |
+| 14 | narration | `tts_chatterbox` | 00:00.000-00:01.600 | 00:07.500-00:09.100 | narration line n04 (synthetic voice): “Steam, across the ocean.” |
+| 15 | footage | `loc_storm_sea` | 00:23.200-00:24.137 | 00:08.906-00:09.844 | picture (bw grade) |
+| 16 | narration | `tts_chatterbox` | 00:00.000-00:01.750 | 00:09.840-00:11.590 | narration line n05 (synthetic voice): “Then we put the world in a box,” |
+| 17 | footage | `dv_container_move` | 01:57.000-01:58.406 | 00:09.844-00:11.250 | picture (desat grade) |
+| 18 | footage | `dv_container_move` | 01:04.000-01:04.703 | 00:11.250-00:11.953 | picture (desat grade) |
+| 19 | sfx | `dv_longbeach_b` | 04:58.950-05:00.600 | 00:11.250-00:12.900 | sound effect / natural sound |
+| 20 | footage | `dv_c17_takeoff` | 03:04.000-03:05.641 | 00:11.953-00:13.594 | picture (desat grade) |
+| 21 | sfx | `dv_c5_takeoff` | 02:40.000-02:48.000 | 00:11.953-00:19.953 | sound effect / natural sound |
+| 22 | narration | `tts_chatterbox` | 00:00.000-00:01.750 | 00:12.000-00:13.750 | narration line n06 (synthetic voice): “and gave it wings.” |
+| 23 | footage | `dv_c5_takeoff` | 00:42.000-00:43.406 | 00:13.594-00:15.000 | picture (desat grade) |
+| 24 | footage | `nasa_michoud_apollo` | 01:27.000-01:28.406 | 00:15.000-00:16.406 | picture (desat grade) |
+| 25 | narration | `tts_chatterbox` | 00:00.000-00:01.700 | 00:15.230-00:16.930 | narration line n07 (synthetic voice): “Even the Moon had to be shipped.” |
+| 26 | footage | `nasa_crawler1964` | 08:28.000-08:29.406 | 00:16.406-00:17.812 | picture (desat grade) |
+| 27 | footage | `nasa_a11_70mm` | 00:08.000-00:09.406 | 00:17.812-00:19.219 | picture (launch grade) |
+| 28 | sfx | `sfx_rs25` | 00:10.800-00:15.400 | 00:17.812-00:22.412 | sound effect / natural sound |
+| 29 | footage | `nasa_a11_70mm` | 00:20.500-00:21.438 | 00:19.219-00:20.156 | picture (launch grade) |
+| 30 | footage | `nasa_a11_70mm` | 00:34.000-00:35.406 | 00:20.156-00:21.562 | picture (launch grade) |
+| 31 | narration | `tts_chatterbox` | 00:00.000-00:01.570 | 00:21.560-00:23.130 | narration line n08 (synthetic voice): “Now, we're building again.” |
+| 32 | footage | `nasa_maf_cs34_prod` | 00:57.000-00:58.875 | 00:21.562-00:23.438 | picture (full grade) |
+| 33 | footage | `nasa_arc_supercomp` | 01:18.000-01:18.938 | 00:23.438-00:24.375 | picture (full grade) |
+| 34 | narration | `tts_chatterbox` | 00:00.000-00:00.950 | 00:23.440-00:24.390 | narration line n09 (synthetic voice): “Data centers. Microchips. Robots. Power. Defense.” |
+| 35 | footage | `dv_1011605` | 01:13.000-01:13.469 | 00:24.375-00:24.844 | picture (night grade) |
+| 36 | narration | `tts_chatterbox` | 00:00.000-00:00.930 | 00:24.840-00:25.770 | narration line n09 (synthetic voice): “Data centers. Microchips. Robots. Power. Defense.” |
+| 37 | footage | `dv_936659` | 00:27.000-00:27.938 | 00:24.844-00:25.781 | picture (full grade) |
+| 38 | footage | `dv_936659` | 00:31.400-00:31.869 | 00:25.781-00:26.250 | picture (full grade) |
+| 39 | footage | `dv_823372` | 01:41.000-01:41.469 | 00:26.250-00:26.719 | picture (full grade) |
+| 40 | narration | `tts_chatterbox` | 00:00.000-00:00.770 | 00:26.250-00:27.020 | narration line n09 (synthetic voice): “Data centers. Microchips. Robots. Power. Defense.” |
+| 41 | footage | `nasa_react_print` | 00:33.000-00:33.469 | 00:26.719-00:27.188 | picture (full grade) |
+| 42 | footage | `dv_910394` | 00:08.500-00:08.969 | 00:27.188-00:27.656 | picture (full grade) |
+| 43 | narration | `tts_chatterbox` | 00:00.000-00:00.600 | 00:27.190-00:27.790 | narration line n09 (synthetic voice): “Data centers. Microchips. Robots. Power. Defense.” |
+| 44 | footage | `dv_853281` | 01:40.000-01:40.469 | 00:27.656-00:28.125 | picture (full grade) |
+| 45 | footage | `dv_848006` | 00:16.000-00:16.938 | 00:28.125-00:29.062 | picture (full grade) |
+| 46 | narration | `tts_chatterbox` | 00:00.000-00:00.810 | 00:28.130-00:28.940 | narration line n09 (synthetic voice): “Data centers. Microchips. Robots. Power. Defense.” |
+| 47 | footage | `dv_943091` | 04:11.000-04:11.938 | 00:29.062-00:30.000 | picture (full grade) |
+| 48 | footage | `nasa_maf_reel2022` | 00:26.000-00:26.938 | 00:30.000-00:30.938 | picture (full grade) |
+| 49 | narration | `tts_chatterbox` | 00:00.000-00:01.900 | 00:30.200-00:32.100 | narration line n14 (synthetic voice): “The biggest build of our lifetime.” |
+| 50 | footage | `nasa_maf_reel2022` | 01:43.000-01:43.938 | 00:30.938-00:31.875 | picture (full grade) |
+| 51 | footage | `nasa_art3_cs_waterway` | 01:00.000-01:00.469 | 00:31.875-00:32.344 | picture (full grade) |
+| 52 | footage | `nasa_guppy2023` | 01:28.000-01:28.938 | 00:32.344-00:33.281 | picture (full grade) |
+| 53 | narration | `tts_chatterbox` | 00:00.000-00:01.780 | 00:32.400-00:34.180 | narration line n15 (synthetic voice): “And every piece of it has to move.” |
+| 54 | footage | `dv_848006` | 01:20.000-01:20.938 | 00:33.281-00:34.219 | picture (full grade) |
+| 55 | music | `mus_rynos` | 02:18.785-02:48.785 | 00:33.750-01:03.750 | music bed (track bars 74-90) |
+| 56 | footage | `dv_savannah_port` | 06:50.000-06:50.469 | 00:34.219-00:34.688 | picture (night grade) |
+| 57 | footage | `dv_1010655` | 00:13.800-00:15.206 | 00:34.688-00:36.094 | picture (full grade) |
+| 58 | narration | `tts_chatterbox` | 00:00.000-00:01.250 | 00:34.720-00:35.970 | narration line n16 (synthetic voice): “Across oceans. Through borders. On time.” |
+| 59 | footage | `dv_savannah_gate` | 03:49.000-03:49.938 | 00:36.094-00:37.031 | picture (full grade) |
+| 60 | narration | `tts_chatterbox` | 00:00.000-00:00.950 | 00:36.100-00:37.050 | narration line n16 (synthetic voice): “Across oceans. Through borders. On time.” |
+| 61 | narration | `tts_chatterbox` | 00:00.000-00:00.840 | 00:37.000-00:37.840 | narration line n16 (synthetic voice): “Across oceans. Through borders. On time.” |
+| 62 | footage | `dv_844294` | 00:29.000-00:29.469 | 00:37.031-00:37.500 | picture (night grade) |
+| 63 | footage | `dv_844294` | 04:40.000-04:41.406 | 00:37.500-00:38.906 | picture (night grade) |
+| 64 | narration | `tts_chatterbox` | 00:00.000-00:01.740 | 00:37.730-00:39.470 | narration line n17 (synthetic voice): “This isn't just freight anymore.” |
+| 65 | footage | `dv_916015` | 00:03.800-00:04.503 | 00:38.906-00:39.609 | picture (full grade) |
+| 66 | narration | `tts_chatterbox` | 00:00.000-00:01.140 | 00:39.600-00:40.740 | narration line n18 (synthetic voice): “It's the mission.” |
+| 67 | footage | `dv_sealift_dusk` | 00:11.600-00:13.241 | 00:39.609-00:41.250 | picture (full grade) |
+| 68 | footage | `dv_longbeach_a` | 02:17.000-02:17.938 | 00:41.250-00:42.188 | picture (full grade) |
+| 69 | narration | `tts_chatterbox` | 00:00.000-00:01.760 | 00:41.500-00:43.260 | narration line n19 (synthetic voice): “And logistics has to step up.” |
+| 70 | footage | `dv_822436` | 00:16.000-00:16.938 | 00:42.188-00:43.125 | picture (full grade) |
+| 71 | footage | `nasa_rs25_2018` | 00:30.000-00:30.703 | 00:43.125-00:43.828 | picture (full grade) |
+| 72 | sfx | `sfx_rs25` | 00:20.000-00:22.500 | 00:43.125-00:45.625 | sound effect / natural sound |
+| 73 | narration | `tts_chatterbox` | 00:00.000-00:02.410 | 00:43.800-00:46.210 | narration line n20 (synthetic voice): “Bigger. Faster. Built for it.” |
+| 74 | footage | `dv_c5_takeoff` | 02:35.000-02:35.703 | 00:43.828-00:44.531 | picture (full grade) |
+| 75 | footage | `dv_c17_takeoff` | 00:52.000-00:52.469 | 00:44.531-00:45.000 | picture (full grade) |
+| 76 | footage | `nasa_maf_reel2022` | 11:20.000-11:20.938 | 00:45.000-00:45.938 | picture (full grade) |
+| 77 | footage | `dv_savannah_cargo` | 02:50.000-02:50.469 | 00:45.938-00:46.406 | picture (full grade) |
+| 78 | footage | `dv_1011605` | 01:44.500-01:44.969 | 00:46.406-00:46.875 | picture (night grade) |
+| 79 | footage | `nasa_maf_reel2022` | 04:05.000-04:05.469 | 00:46.875-00:47.344 | picture (full grade) |
+| 80 | footage | `dv_936659` | 00:11.000-00:11.469 | 00:47.344-00:47.812 | picture (full grade) |
+| 81 | footage | `dv_848006` | 02:24.000-02:24.234 | 00:47.812-00:48.047 | picture (full grade) |
+| 82 | footage | `dv_1010655` | 02:31.600-02:31.834 | 00:48.047-00:48.281 | picture (full grade) |
+| 83 | footage | `dv_container_move` | 02:10.000-02:10.234 | 00:48.281-00:48.516 | picture (full grade) |
+| 84 | footage | `nasa_a11_70mm` | 00:42.000-00:42.234 | 00:48.516-00:48.750 | picture (launch grade) |
+| 85 | narration | `tts_chatterbox` | 00:00.000-00:01.540 | 00:49.050-00:50.590 | narration line n21 (synthetic voice): “Software ate the world.” |
+| 86 | narration | `tts_chatterbox` | 00:00.000-00:01.540 | 00:50.850-00:52.390 | narration line n22 (synthetic voice): “Somebody has to ship it. Volume.” |
+| 87 | footage | `dv_sealift_dusk` | 00:11.800-00:15.738 | 00:52.500-01:03.750 | picture, low-opacity background under the logo reveal |
+| 88 | narration | `tts_chatterbox` | 00:00.000-00:00.750 | 00:52.970-00:53.720 | narration line n22 (synthetic voice): “Somebody has to ship it. Volume.” |

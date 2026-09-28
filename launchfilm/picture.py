@@ -248,8 +248,8 @@ def render(fmt, out_path, audio=None, only_frames=None, still_dir=None):
         if audio:
             cmd += ["-i", str(audio)]
         cmd += ["-map", "0:v"] + (["-map", "1:a"] if audio else [])
-        cmd += ["-c:v", "libx264", "-profile:v", "high", "-preset", "slow", "-crf", "17",
-                "-maxrate", "16M", "-bufsize", "24M", "-pix_fmt", "yuv420p", "-g", "48",
+        cmd += ["-c:v", "libx264", "-profile:v", "high", "-preset", "slow", "-crf", "19",
+                "-maxrate", "11M", "-bufsize", "20M", "-pix_fmt", "yuv420p", "-g", "48",
                 "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709"]
         if audio:
             cmd += ["-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-ac", "2"]
