@@ -1,14 +1,15 @@
 # v2: Volume launch film (`launchfilm/`)
 
 A 60-second launch film for Volume built from real, license-safe footage (Library of
-Congress early films, NASA, DVIDS), public-domain voices (President Kennedy at Rice
-University, 1962; Apollo 11 Launch Control, 1969) and a CC BY 4.0 music track, cut on a
-single 128 BPM cue sheet. Nothing in the picture is generated: no AI imagery, no procedural
+Congress early films, NASA, DVIDS), one narrator and a CC BY 4.0 music track, cut on a
+single 128 BPM cue sheet. The narration is voiced by an open-weight text-to-speech model
+(Kokoro-82M, Apache-2.0) and can be swapped for a recorded human read by dropping WAVs into
+`narration_recorded/`. Nothing in the picture is generated: no AI imagery, no procedural
 graphics beyond type and the client's own logo file.
 
 ```bash
 sudo apt-get install -y ffmpeg fonts-inter
-pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml
+pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml soundfile kokoro-onnx
 python3 -m launchfilm.render --all        # fetch sources, mix, render 16:9 + 9:16, credits, contact sheets
 ```
 
@@ -20,8 +21,8 @@ clip's URL and quoted license, and the render downloads them into `cache/`.
 | file | what it is |
 |---|---|
 | `launchfilm/sources.yaml` | every external input: URL, item page, quoted rights statement, access date |
-| `launchfilm/cuesheet.json` | the edit: shots, crops per format, titles, voice lines, music segments, SFX, reveal, end card |
-| `launchfilm/CREDITS.csv`, `CREDITS.md` | generated from the manifest + actual uses (every clip, voice, music cue, SFX) |
+| `launchfilm/cuesheet.json` | the edit: shots, crops per format, narration script and timing, closing lines, music segments, SFX, reveal, end card |
+| `launchfilm/CREDITS.csv`, `CREDITS.md` | generated from the manifest + actual uses (every clip, narration line, music cue, SFX) |
 | `launchfilm/BUILD_NOTES.md` | pipeline, commands, rights decisions and rejected sources |
 | `brand/volume-logo.svg` | the client's logo, rendered as-is |
 

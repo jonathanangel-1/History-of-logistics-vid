@@ -18,10 +18,14 @@ def rgbf(name):
 
 @lru_cache(maxsize=64)
 def probe(path):
+    """Display size (square pixels) and whether the stored pixels are anamorphic."""
     r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
-                        "stream=width,height", "-of", "json", str(path)], capture_output=True, text=True)
+                        "stream=width,height,sample_aspect_ratio", "-of", "json", str(path)],
+                       capture_output=True, text=True)
     s = json.loads(r.stdout)["streams"][0]
-    return s["width"], s["height"]
+    sar = s.get("sample_aspect_ratio", "1:1")
+    num, den = (int(v) for v in sar.split(":")) if sar[:1].isdigit() and not sar.startswith("0:") else (1, 1)
+    return int(round(s["width"] * num / den)) // 2 * 2, s["height"], num != den
 
 
 def crop_box(sw, sh, active, aspect, cx, cy, zoom):
@@ -50,7 +54,7 @@ class ShotReader:
         self.W, self.H, self.n = W, H, nframes
         s = sources[shot["src"]]
         path = src_path(shot["src"], sources)
-        sw, sh = probe(path)
+        sw, sh, anamorphic = probe(path)
         cx, cy, zoom = shot.get("c16" if fmt == "16x9" else "c9", [0.5, 0.5, 1.0])
         x, y, w, h = crop_box(sw, sh, s.get("active", [0, 0, 1, 1]), W / H, cx, cy, zoom)
         self.push = shot.get("push", 0.0)
@@ -59,7 +63,8 @@ class ShotReader:
         speed = shot.get("speed", 1.0)
         t_in = shot["in"] - s.get("segment", [0])[0]
         dur = nframes / fps * speed + 0.5
-        vf = (f"crop={w}:{h}:{x}:{y},scale={self.DW}:{self.DH}:flags=lanczos,"
+        square = f"scale={sw}:{sh},setsar=1," if anamorphic else ""
+        vf = (f"{square}crop={w}:{h}:{x}:{y},scale={self.DW}:{self.DH}:flags=lanczos,"
               f"setpts=(PTS-STARTPTS)/{speed},fps={fps}")
         self.proc = subprocess.Popen(
             ["ffmpeg", "-v", "error", "-ss", f"{t_in:.3f}", "-i", str(path), "-t", f"{dur:.3f}",
