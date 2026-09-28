@@ -31,7 +31,8 @@ python3 -m logistics.render --mux                   # re-mux existing shots + sc
 python3 -m logistics.contact build/history_of_logistics.mp4 build/contact_sheet.png
 ```
 
-A full render takes about 25–35 minutes on 4 cores. Frames are rendered in parallel
+A full render takes about 25 minutes on 4 cores. Neither MP4 is committed because
+both exceed 50 MB. Frames are rendered in parallel
 (`--workers`) and piped straight into ffmpeg, one segment per shot.
 
 ## One cue sheet drives both picture and score
