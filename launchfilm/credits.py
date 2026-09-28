@@ -2,6 +2,9 @@
 import csv
 import re
 
+import soundfile as sf
+
+from launchfilm import narrate
 from launchfilm.config import PKG, Cues, load_sources
 
 
@@ -46,9 +49,14 @@ def rows():
         note = "picture, low-opacity background under the logo reveal" if s["src"] == "brand_bg" \
             else f"picture ({s.get('look', 'full')} grade)"
         add("footage", sid, s["in"], s["in"] + (t1 - t0) * speed, t0, t1, note)
-    for v in cs["voices"]:
-        add("voice", v["src"], v["in"], v["out"], v["at_s"], v["at_s"] + v["out"] - v["in"],
-            "voice line: " + " ".join(c[2] for c in v["captions"]))
+    nc = cs["narration"]
+    for line in nc["lines"]:
+        d = sf.info(str(narrate.line_path(line, nc))).duration - narrate.LEAD_S
+        add("narration", nc["voices"], 0.0, d, line["at_s"], line["at_s"] + d,
+            f"narration line {line['id']} (synthetic voice): \u201c{line['text']}\u201d")
+    first, last = nc["lines"][0]["at_s"], nc["lines"][-1]["at_s"]
+    add("narration", nc["model"], 0.0, 0.0, first, last,
+        "text-to-speech engine that voiced every narration line")
     m = cs["music"]
     ms = src[m["src"]]
     bar = 4 * 60.0 / ms["bpm"]

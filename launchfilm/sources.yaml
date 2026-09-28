@@ -300,34 +300,32 @@ sources:
     accessed: *acc
     active: [0.045, 0.045, 0.955, 0.955]
 
-  # ---------------------------------------------------------------- voices (public domain)
-  vo_jfk_rice:
-    kind: audio
-    title: "Address at Rice University on the Nation's Space Effort (audio)"
-    date: "1962-09-12"
-    creator: "President John F. Kennedy; recording from the John F. Kennedy Presidential Library and Museum (NARA)"
-    page: https://commons.wikimedia.org/wiki/File:Jfk_rice_university_we_choose_to_go_to_the_moon.ogg
-    url: https://upload.wikimedia.org/wikipedia/commons/5/50/Jfk_rice_university_we_choose_to_go_to_the_moon.ogg
-    license: "Public domain (PD-USGov: U.S. federal government work)"
+  # ---------------------------------------------------------------- narration (synthetic voice)
+  tts_kokoro_model:
+    kind: model
+    title: "Kokoro-82M text-to-speech model (ONNX export, kokoro-v1.0.onnx)"
+    date: "2025"
+    creator: "Kokoro-82M (hexgrad); ONNX export and runtime by the kokoro-onnx project"
+    page: https://huggingface.co/hexgrad/Kokoro-82M
+    url: https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+    license: "Apache-2.0 (model weights); kokoro-onnx runtime MIT"
     rights: >-
-      Commons file page: license "PD-USGov" - "This work is in the public domain in the
-      United States because it is a work prepared by an officer or employee of the United
-      States Government as part of that person's official duties under the terms of Title
-      17, Chapter 1, Section 105 of the US Code." Source: "John F. Kennedy Presidential
-      Library & Museum" (a NARA presidential library). A presidential address delivered in
-      office, recorded for the White House / JFK Library - not a network broadcast copy.
+      Model card: "license: apache-2.0" ... "With Apache-licensed weights, Kokoro can be
+      deployed anywhere from production environments to personal projects." ... "This is an
+      Apache-licensed model, and Kokoro has been deployed in numerous projects and
+      commercial APIs." Runtime: kokoro-onnx, "MIT License".
     accessed: *acc
-  vo_a11_launch:
-    kind: av
-    title: "Video - Apollo 11 Pre-Launch and Launch (Launch Control commentary, Press Site)"
-    date: "1969-07-16"
-    creator: "NASA / Kennedy Space Center (Apollo Launch Control public affairs commentary)"
-    page: https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372
-    url: "https://images-assets.nasa.gov/video/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372~medium.mp4"
-    segment: [3360, 3425]
-    ext: .mkv
-    license: "Public domain (NASA, U.S. federal government work)"
-    rights: *nasa_rights
+  tts_kokoro_voices:
+    kind: model
+    title: "Kokoro-82M stock voice styles (voices-v1.0.bin); narrator = 0.6 am_michael + 0.4 am_onyx"
+    date: "2025"
+    creator: "Kokoro-82M (hexgrad); packaged by the kokoro-onnx project"
+    page: https://huggingface.co/hexgrad/Kokoro-82M
+    url: https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+    license: "Apache-2.0"
+    rights: >-
+      Distributed with the Apache-2.0 Kokoro-82M release (model card: "license:
+      apache-2.0"). Stock voices of the model, not a clone of any real person.
     accessed: *acc
 
   # ---------------------------------------------------------------- music

@@ -1,5 +1,5 @@
 """Frame renderer: real footage cut on the cue sheet grid, light grade + grain,
-kinetic type, voice captions, logo reveal and end card. One pass per format."""
+closing type, logo reveal and end card. One pass per format."""
 import json
 import subprocess
 from functools import lru_cache
@@ -167,30 +167,14 @@ def draw_titles(img, cs, fmt, t, over_footage):
         if not (t0 <= t < t1):
             continue
         words = ti["text"].split(" ")
-        nv = _words_visible(t, t0, ti.get("step_beats", 1) * cs.beat_s, len(words))
+        step = ti.get("step_s", ti.get("step_beats", 1) * cs.beat_s)
+        nv = _words_visible(t, t0, step, len(words))
         rgba = T.render_text(ti["text"], ti["style"], fmt, W, nv)
         # dy stacks two-line pairs: -1 above center, +1 below
         cy = H / 2 + ti.get("dy", 0) * rgba.shape[0] * 0.55
         if over_footage:
             T.scrim(img, cy, rgba.shape[0] * 2.6, 0.4, W / 2, rgba.shape[1] * 1.5)
         T.composite(img, rgba, W / 2, cy, 1.0, drop_shadow=over_footage)
-    return img
-
-
-def draw_captions(img, cs, fmt, t):
-    H, W = img.shape[:2]
-    for v in cs["voices"]:
-        base = v["at_s"] - v["in"]
-        for (a, b, txt) in v["captions"]:
-            ta, tb = base + a, base + b
-            if not (ta - 0.03 <= t < tb + 0.12):
-                continue
-            rgba = T.render_text(txt, "caption", fmt, W)
-            cy = H - 150 if fmt == "16x9" else 1390
-            T.scrim(img, cy + 12, 160, 0.5, W / 2, rgba.shape[1] * 1.4 + 120)
-            T.composite(img, rgba, W / 2, cy, 1.0)
-            lab = T.render_text(v["label"], "label", fmt, W, color="gold_bright")
-            T.composite(img, lab, W / 2, cy + rgba.shape[0] / 2 + 26, 0.9)
     return img
 
 
@@ -335,8 +319,6 @@ def render(fmt, out_path, audio=None, only_frames=None, still_dir=None):
             footage = reader is not None and src != "brand_bg"
             img = np.clip(img, 0, 1).astype(np.float32)
             img = draw_titles(img, cs, fmt, t, footage)
-            if footage:
-                img = draw_captions(img, cs, fmt, t)
             if t_hit <= t < t_end:
                 cy = H / 2 if fmt == "16x9" else H * 0.47
                 wl = cs["reveal"]["logo_w_16x9" if fmt == "16x9" else "logo_w_9x16"]
