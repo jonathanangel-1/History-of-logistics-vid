@@ -1,4 +1,4 @@
-"""Type: kinetic lowercase lines (word by word), voice captions, closing lines.
+"""Type: closing lines (word by word, paced to the narration) and the end card.
 
 Layout is computed for the full line first, so words that appear later never
 shift the ones already on screen.
@@ -12,7 +12,6 @@ from launchfilm.config import FONTS, PALETTE
 
 STYLES = {
     # size_16x9, size_9x16, font, tracking(em), max width fraction
-    "kinetic": dict(s169=78, s916=80, font="sans_medium", track=-0.035, maxw=0.8, lead=1.12),
     "closing": dict(s169=74, s916=74, font="sans_medium", track=-0.035, maxw=0.82, lead=1.12),
     "caption": dict(s169=46, s916=50, font="sans_medium", track=-0.015, maxw=0.8, lead=1.2),
     "label": dict(s169=19, s916=24, font="mono", track=0.08, maxw=0.9, lead=1.2),

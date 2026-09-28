@@ -2,7 +2,8 @@
 
     python3 -m launchfilm.render --all                 fetch, mix, both formats, credits, contact sheets
     python3 -m launchfilm.render --fetch               download sources.yaml into cache/sources
-    python3 -m launchfilm.render --audio               mix only -> cache/work/mix.wav
+    python3 -m launchfilm.render --narration           (re)synthesize narration lines -> cache/work/narration
+    python3 -m launchfilm.render --audio               narration + mix -> cache/work/mix.wav
     python3 -m launchfilm.render --format 16x9         one format (uses the existing mix)
     python3 -m launchfilm.render --stills 12.5,40      PNG stills (seconds) -> out/stills/
     python3 -m launchfilm.render --contact             contact sheets from the rendered MP4s
@@ -12,7 +13,7 @@ import argparse
 import shutil
 from pathlib import Path
 
-from launchfilm import audio, contact, credits, fetch, picture
+from launchfilm import audio, contact, credits, fetch, narrate, picture
 from launchfilm.config import FORMATS, OUT, WORK, Cues
 
 
@@ -20,6 +21,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--fetch", action="store_true")
+    ap.add_argument("--narration", action="store_true")
     ap.add_argument("--audio", action="store_true")
     ap.add_argument("--format", choices=list(FORMATS), action="append")
     ap.add_argument("--stills")
@@ -32,6 +34,8 @@ def main():
     if a.all or a.fetch:
         fetch.fetch()
     mix = WORK / "mix.wav"
+    if a.all or a.audio or a.narration or ((a.format) and not mix.exists()):
+        narrate.build()
     if a.all or a.audio or ((a.format) and not mix.exists()):
         audio.build(stems=True)
     fmts = list(FORMATS) if a.all else ([] if a.stills else (a.format or []))

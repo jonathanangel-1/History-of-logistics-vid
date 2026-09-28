@@ -1,12 +1,13 @@
-"""Soundtrack: licensed music edited on the bar grid, public-domain voices with
-ducking, real/CC0 sound effects, mastered to -14 LUFS integrated / -1 dBTP."""
+"""Soundtrack: the licensed track played in whole phrases at a constant level, one
+narrator on top, real/CC0 sound effects, mastered to -14 LUFS integrated / -1 dBTP."""
 import json
 import re
 import subprocess
 
 import numpy as np
-from scipy.signal import butter, resample_poly, sosfilt, sosfiltfilt
+from scipy.signal import resample_poly
 
+from launchfilm import narrate
 from launchfilm.config import WORK, Cues, load_sources, src_path
 
 TARGET_LUFS = -14.0
@@ -36,6 +37,15 @@ def decode(sid, t0=None, t1=None, sr=48000, sources=None, af=None):
     return np.frombuffer(raw, np.float32).reshape(-1, 2).astype(np.float64)
 
 
+def decode_file(path, sr=48000, af=None):
+    cmd = ["ffmpeg", "-v", "error", "-i", str(path), "-ac", "2", "-ar", str(sr)]
+    if af:
+        cmd += ["-af", af]
+    cmd += ["-f", "f32le", "-"]
+    raw = subprocess.run(cmd, capture_output=True, check=True).stdout
+    return np.frombuffer(raw, np.float32).reshape(-1, 2).astype(np.float64)
+
+
 def fades(x, sr, fin=0.0, fout=0.0):
     n = len(x)
     g = np.ones(n)
@@ -55,21 +65,6 @@ def place(bus, x, t, sr):
     n = min(len(x), len(bus) - i)
     if n > 0:
         bus[i:i + n] += x[:n]
-
-
-def sweep_lowpass(x, sr, f0, f1, blocks=64):
-    """Time-varying lowpass (block-wise 4th-order Butterworth, overlap-add crossfaded)."""
-    n = len(x)
-    out = np.zeros_like(x)
-    edges = np.linspace(0, n, blocks + 1).astype(int)
-    for b in range(blocks):
-        a, e = edges[b], edges[b + 1]
-        pad = min(a, int(0.02 * sr))
-        f = f0 * (f1 / f0) ** ((b + 0.5) / blocks)
-        sos = butter(4, min(f, sr * 0.45), "low", fs=sr, output="sos")
-        y = sosfilt(sos, x[a - pad:e], axis=0)
-        out[a:e] = y[pad:]
-    return out
 
 
 def measure(path):
@@ -119,50 +114,29 @@ def build(out_path=None, stems=False):
     voice = np.zeros((n, 2))
     sfx = np.zeros((n, 2))
 
-    # ---- music edit
+    # ---- music: whole phrases of the track at one constant level (no ducking, no sweeps)
     m = cs["music"]
     ms = sources[m["src"]]
     bar_src = 4 * 60.0 / ms["bpm"]
-    track = decode(m["src"], sources=sources)
+    track = decode(m["src"], sources=sources, af=m.get("carve_af"))
     for seg in m["segments"]:
         a = ms["first_beat_s"] + seg["src_bar"] * bar_src
         pre = 0.006  # start a hair early so the downbeat transient is intact
         i0 = int(round((a - pre) * sr))
         i1 = int(round((a + seg["bars"] * bar_src) * sr))
         x = track[i0:i1].copy()
-        if "lp_hz" in seg:
-            x = sweep_lowpass(x, sr, *seg["lp_hz"])
-        if "gain_db" in seg:
-            g0, g1 = seg["gain_db"] if isinstance(seg["gain_db"], list) else (seg["gain_db"],) * 2
-            x *= db(np.linspace(g0, g1, len(x)))[:, None]
         x = fades(x, sr, seg.get("fade_in_s", 0.004), seg.get("fade_out_s", 0.004))
         place(music, x, cs.t(seg["at"]) - pre, sr)
+    music *= db(m.get("gain_db", 0))
 
-    # ---- voices (cleaned, level-matched) and duck envelope
-    duck = np.ones(n)
-    dk = cs["duck"]
-    for v in cs["voices"]:
-        af = ("highpass=f=95,lowpass=f=9000,afftdn=nr=12:nf=-42,"
-              "equalizer=f=2800:t=q:w=1.2:g=3,equalizer=f=220:t=q:w=1:g=-2,"
-              "acompressor=threshold=-24dB:ratio=3:attack=5:release=120:makeup=4")
-        x = decode(v["src"], v["in"], v["out"], sr, sources, af=af)
-        x = x.mean(axis=1, keepdims=True).repeat(2, axis=1)
-        rms = np.sqrt(np.mean(x[np.abs(x[:, 0]) > 1e-3] ** 2)) + 1e-9
-        x *= db(-19.0) / rms * db(v.get("gain_db", 0))
-        x = fades(x, sr, 0.012, 0.03)
-        t0 = v["at_s"]
-        place(voice, x, t0, sr)
-        d = db(v.get("duck_db", dk["db"]))
-        a0 = int((t0 - dk["pre_s"]) * sr)
-        a1 = int((t0 + len(x) / sr + dk["post_s"]) * sr)
-        att = int(dk["attack_s"] * sr)
-        rel = int(dk["release_s"] * sr)
-        env = np.ones(n)
-        env[a0:a1] = d
-        env[max(0, a0 - att):a0] = np.linspace(1, d, a0 - max(0, a0 - att))
-        env[a1:a1 + rel] = np.linspace(d, 1, rel)
-        duck = np.minimum(duck, env)
-    music *= duck[:, None]
+    # ---- narration: one voice, one processing chain, one level for every line
+    nc = cs["narration"]
+    chain = lambda p, sr: decode_file(p, sr, af=nc["chain_af"]).mean(axis=1)
+    for line in nc["lines"]:
+        for t0, x in narrate.placements(line, nc, sr, decode=chain):
+            place(voice, x[:, None].repeat(2, axis=1) * db(line.get("gain_db", 0)), t0 - narrate.LEAD_S, sr)
+    active = np.abs(voice[:, 0]) > db(-50)
+    voice *= db(nc["level_dbfs"]) / (np.sqrt(np.mean(voice[active] ** 2)) + 1e-9)
 
     # ---- sound effects
     for e in cs["sfx"]:

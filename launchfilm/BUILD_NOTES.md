@@ -1,57 +1,107 @@
 # Build notes: Volume launch film (v2)
 
 v2 replaces v1's procedural picture and synthesized score with real, license-safe
-footage, public-domain voices and a free commercially licensed music track. v1
-(`logistics/`, root `cuesheet.json`) is untouched.
+footage, one narrator and a free commercially licensed music track. v1 (`logistics/`,
+root `cuesheet.json`) is untouched.
+
+## Story (v2.1)
+
+One narrator carries the whole film, and every line is cut against the picture it names.
+The history (a harbor being built, men hauling cargo, rails, steam, the box, wings, the
+Saturn V stage leaving its factory) sets up the thesis: the world is building again (data
+centers, microchips, robots, power, defense), it is the biggest build of our lifetime, and
+every piece of it has to move, so logistics has to step up. The closing lines ("Software ate
+the world." / "Somebody has to ship it.") land on black, then the gold square lands on the
+track's outro downbeat and the narrator says the name. The script lives in
+`cuesheet.json` (`narration.lines`); there are no subtitles, only the two closing lines as
+type.
 
 ## Pipeline
 
 ```
-sources.yaml ──fetch.py──> cache/sources/            (git-ignored downloads)
-cuesheet.json ─┬─audio.py──> cache/work/mix.wav       (music edit + voices + SFX, mastered)
-               └─picture.py─> out/*.mp4               (cut, grade, grain, type, logo; muxes the mix)
-credits.py ──> CREDITS.csv / CREDITS.md               (generated from the manifest + actual uses)
+sources.yaml ──fetch.py──> cache/sources/             (git-ignored downloads)
+cuesheet.json ─┬─narrate.py─> cache/work/narration/    (one WAV per narration line)
+               ├─audio.py───> cache/work/mix.wav       (music + narration + SFX, mastered)
+               └─picture.py─> out/*.mp4                (cut, grade, grain, type, logo; muxes the mix)
+credits.py ──> CREDITS.csv / CREDITS.md                (generated from the manifest + actual uses)
 contact.py ──> out/contact_sheet_{16x9,9x16}.png
 ```
 
 - **One tempo map.** `cuesheet.json` is 128 BPM in 4/4 (1 bar = 1.875 s), matching the
   music track's measured tempo (128.00 BPM, first beat at 0.035 s). Shots, titles and music
-  segments are placed in bars; voices and SFX in seconds (`at_s`) where they must line up
-  with a word or transient. Moving a number in the sheet moves picture and sound together.
-- **Picture.** Each shot is decoded by ffmpeg straight from the source (accurate seek, crop to
-  the output aspect inside the source's `active` area, Lanczos scale, conform to 24 fps),
-  then graded in numpy: warm B&W for the archival section, desaturated color for the box and
-  air beats, full color for "now", a single light grain/vignette pass over everything.
-  Optional per-shot slow push-in, 3-frame white flash on the clang / slam / liftoff, and a
-  2-frame chromatic glitch on three modern cuts only. The 9:16 cut uses its own per-shot crop
-  (`c9`), not a pillarbox; captions sit at y = 1390 of 1920 (well inside the 250 px margins).
-- **Type.** Inter (site font). Lowercase kinetic lines revealed word by word on the beat;
-  voice captions in sentence case with a small monospace historical label ("RICE UNIVERSITY ·
-  1962", "APOLLO 11 LAUNCH CONTROL · 1969") so speakers read as historical speeches, not
-  endorsements.
+  segments are placed in bars; narration lines and SFX in seconds (`at_s` = onset of the
+  first word) so words land on beats. Moving a number in the sheet moves picture and sound
+  together.
+- **Picture.** Each shot is decoded by ffmpeg straight from the source (accurate seek, square
+  pixels for anamorphic files, crop to the output aspect inside the source's `active` area,
+  Lanczos scale, conform to 24 fps), then graded in numpy: warm B&W for the archival section,
+  desaturated color for the box, wings and Apollo beats, full color from "Now, we're building
+  again", a single light grain/vignette pass over everything. Optional per-shot slow push-in,
+  3-frame white flash on the big downbeats, and a 2-frame chromatic glitch on two cuts in the
+  final burst. The 9:16 cut uses its own per-shot crop (`c9`), not a pillarbox.
+- **Narration.** `narrate.py` + `tts_chatterbox.py` run a voice-over "session" with
+  Chatterbox (Resemble AI, MIT). Every line is read in several seeded takes (4 per line,
+  8 for "Volume."), and the kept take must transcribe back to exactly the script
+  (faster-whisper), sit in the narrator's pitch range (85-125 Hz median F0, pYIN), and
+  score best on UTMOS (an automatic naturalness predictor) among the takes that pass. The
+  five single words ("Data centers. Microchips. Robots. Power. Defense.") are one read,
+  split at its pauses and placed on their beats, so they keep a spoken cadence. The
+  narrator's timbre comes from a reference built in the same session: Chatterbox's own
+  stock voice reading a neutral paragraph, lowered 2.9 semitones with formants shifted.
+  It is a synthetic voice, not a recording or clone of any person, and every generated
+  file carries Resemble AI's imperceptible Perth watermark. The session is reproducible
+  (fixed seeds) and cached per line. Chatterbox pins its own torch/numpy, so it runs in
+  a separate environment named by `CHATTERBOX_PYTHON` (setup below). **A recorded human
+  read replaces it without code changes:** put `narration_recorded/<line id>.wav` (for
+  example `n07.wav`) in the repo root and re-run `--audio`. v2.1's Kokoro voice was
+  dropped after client review ("sounds like AI").
+- **Type.** Inter and Manrope (the site's faces). Only the two closing lines appear as
+  type over footage/black, revealed word by word at the narrator's pace.
+- **Closing sequence (`endcard.py`).** Built from the volumeba.com design language
+  rather than a centered card: after "Volume." the logo glides to the top-left while the
+  frame closes into the site's rounded photographic stage (22 px radius, charcoal
+  surround) over a slowed dusk-at-sea shot. Then, on the site's strong ease-out: the mono
+  eyebrow (INTERNATIONAL FREIGHT FORWARDING · SINCE 2000), the large Manrope headline
+  "Global freight. / Clear visibility." with a gold-to-cream gradient and masked line
+  reveals, the service line, a gold route that draws through the site's three gateway
+  facts (Ben Gurion Airport; Haifa & Ashdod ports; in-house brokerage at the ports) with
+  the gold square riding its head, the coverage line (Israel · U.S. · worldwide) and a
+  smoked-glass URL button with the site's arrow tile. Every string is a live-site claim
+  and lives in `endcard` in the cue sheet; the URL is still one field. The 9:16 version
+  stacks the same elements inside the 250 px safe zones with a vertical route.
 - **Logo.** `logo.py` rasterizes `brand/volume-logo.svg` itself (the file only uses absolute
   M/H/V/L/Q/Z paths, a rounded rect and translate/scale transforms). Letterforms render cream
   `#eee9de`, the square stays gold `#baa88a`. Nothing is redrawn. On the final hit the gold
   square lands first, then the letters resolve outward from it.
-- **Sound.** The track is cut on bar boundaries (6 ms pre-roll so downbeats stay intact):
-  build (track bars 6–15.75) with a low-pass sweep into a half-beat of near-silence, the clang
-  on the downbeat as the big section enters (track bar 16), a full drop-out under "We choose
-  to go to the Moon", the slam back in on track bar 61, a hard stop on "Liftoff!", then the
-  track's biggest downbeat (bar 68) as the logo hit, ringing out under the end card. Voices
-  are high-passed, lightly de-noised (ffmpeg `afftdn`, a classic spectral filter), EQ'd,
-  compressed and level-matched; the music ducks 11–16 dB under each line with a 50 ms release
-  so it slams back in. Master: iterative gain to -14 LUFS integrated with a 4x-oversampled
+- **Sound.** The music plays as written, at one constant level: no ducking, no filter sweeps,
+  no drop-outs. The film opens on a phrase start (track bar 48, after the track's own
+  one-beat breath) and runs through the quiet section and the build into the big section
+  (bar 64 lands at 0:30.0). There is one edit: the big section repeats in 8-bar blocks, and
+  the film skips one repeat (end of bar 65 straight into bar 74; bar-to-bar chroma and band
+  similarity 0.977, so the join is the same music). The track's own quieter two bars
+  (82-83) are the breath under the closing lines, and its outro downbeat (bar 84) is the logo
+  hit at 0:52.5; the outro plays out to 1:00 with a short tail fade. The music is statically
+  EQ-carved (-3.5 dB at 2.5 kHz, -1.5 dB at 450 Hz) so the voice sits in a gap that never
+  moves. Narration chain: high-pass, chest and presence EQ, de-esser, compressor, one level
+  for every line. Master: iterative gain to -14 LUFS integrated with a 4x-oversampled
   true-peak limiter at -1.3 dBFS (measured with ffmpeg `ebur128`).
 
 ## Commands
 
 ```bash
 sudo apt-get install -y ffmpeg fonts-inter        # or drop Inter + JetBrains Mono TTFs into ./fonts/
-pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml
+pip install --break-system-packages numpy scipy opencv-python-headless pillow pyyaml soundfile
 
-python3 -m launchfilm.render --all --artifacts /opt/cursor/artifacts   # everything, ~10 min on 4 cores
-python3 -m launchfilm.render --fetch                                   # downloads only (~3.5 GB)
-python3 -m launchfilm.render --audio                                   # re-mix only
+# narration engine in its own environment (it pins torch 2.6 / numpy < 2)
+python3 -m venv ~/cbvenv
+~/cbvenv/bin/pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+~/cbvenv/bin/pip install chatterbox-tts faster-whisper soundfile
+export CHATTERBOX_PYTHON=~/cbvenv/bin/python
+
+python3 -m launchfilm.render --all --artifacts /opt/cursor/artifacts   # everything
+python3 -m launchfilm.render --fetch                                   # downloads only
+python3 -m launchfilm.render --narration                               # voice any new/changed lines
+python3 -m launchfilm.render --audio                                   # narration + re-mix
 python3 -m launchfilm.render --format 16x9                             # one cut (reuses the mix)
 python3 -m launchfilm.render --stills 22.5,52.6 --format 9x16          # PNG stills -> out/stills/
 python3 -m launchfilm.render --credits                                 # regenerate CREDITS.*
@@ -64,22 +114,31 @@ The end card URL is the single field `endcard.url` in `cuesheet.json`.
 Every clip in the film is a U.S. federal government work (Library of Congress early films
 with no known restrictions, NASA, DVIDS), a CC0 recording, or the one CC BY 4.0 music track.
 Each item's own page was checked on 2026-09-28; the quoted statements are in `sources.yaml`
-and `CREDITS.*`. Creators are credited as institutions / units; the only personal names in the
-credits are the historical speaker (President Kennedy) and the composer, whose credit line is
-required by the CC BY 4.0 license. CC0 contributors are credited as "Wikimedia Commons
-contributor" with the file URL (CC0 requires no attribution).
+and `CREDITS.*`. Creators are credited as institutions / units (DVIDS license lines are quoted
+with the videographer's name replaced by "..."); the only personal name in the credits is the
+composer, whose credit line is required by the CC BY 4.0 license. CC0 contributors are
+credited as "Wikimedia Commons contributor" with the file URL (CC0 requires no attribution).
+The narration engine (Chatterbox, MIT) is credited as a source, and every narration line
+has its own row marked "synthetic voice". Manrope is under the SIL Open Font License.
 
-Voice lines were located with an offline speech recognizer run once during editing to get
-word timings; it is not part of the pipeline and nothing it produced is in the film.
+v2.0 used public-domain soundbites (President Kennedy at Rice University, 1962; Apollo 11
+Launch Control, 1969) as the voice track. Client review: one old speech reused across the
+film did not match the pictures, captions were not being read, and the ducking under each
+soundbite pulled the music down. v2.1 replaces them with the single narrator above; neither
+recording is in the film any more.
 
 ### Rejected or unavailable
 
 | Item | Reason |
 |---|---|
+| NASA Artemis II core stage drone / aerial-at-water clips (MAF, 2024-07-16) | Public domain, but the NASA item IDs (and so the credit URLs) contain photographers' personal names. Replaced with the Michoud 2022 resource reel. |
+| NASA RadPC, LCRD cleanroom, Mars 2020 "pit crew" / "twin" reels, VIPER time-lapse | Non-NASA co-credit (RadPC), presenter or interviews on camera, burned-in lower thirds, or extreme fish-eye. Not used. |
+| DVIDS Robotics at Robins, Carderock welding lab, DLA Distribution visit, data system administrators, radiation-hardened electronics, UAV blood delivery | Interview-driven, faces as the subject, a large robot-maker logo, or SD only. Not used. |
+| DVIDS microgrid items (Fort McCoy, Fort Cavazos, promo series) | Ceremonies, interviews, or a utility's logos. Not used. |
+| DVIDS roll-on/roll-off arrival (881375) | Commercial ship name fills the frame; armored vehicles. Not used. |
+| Pexels / Pixabay (again, for AI/data-center/robotics stock) | Still HTTP 403 from the VM. Modern-build shots come from NASA and DVIDS instead. |
 | Pixabay Music, Pixabay video, Pexels | pixabay.com and pexels.com return HTTP 403 (bot wall) from the build VM. Not bypassed. Music comes from incompetech (CC BY 4.0); modern footage from DVIDS/NASA. |
 | Freesound SFX | Downloads require a login. Not used; SFX are CC0 files from Wikimedia Commons or natural sound from the PD footage. |
-| jfklibrary.org asset pages | HTTP 403 from the VM. Used the JFK Library recording mirrored on Wikimedia Commons (PD-USGov, source stated as the JFK Library). |
-| Commons "President Kennedys Speech at Rice University" (.wav / .ogv) | File pages credit a YouTube upload as the source. Rejected (no YouTube rips) in favor of the JFK Library copy. |
 | loc.gov HTML item pages | Behind a browser challenge; not bypassed. Rights text taken from the LOC JSON API for the same items. |
 | Commons CC BY / CC BY-SA "own work" port videos (Malmö, Malta Freeport, Rauma, etc.) | Attribution would put private individuals' names in the credits; many Commons CC-BY videos are also YouTube-sourced. Avoided. |
 | DVIDS "Night Port Operations" (893855) | Armored vehicles / weapons. Not used. |
@@ -102,4 +161,9 @@ word timings; it is not part of the pipeline and nothing it produced is in the f
 
 `ffprobe` (codec, profile, size, fps, audio), `ebur128` loudness, a frame-by-frame scan for
 unintended black frames, and review of the contact sheets and stills of every shot in both
-formats. The two style-reference videos were never downloaded or opened on the build machine.
+formats, plus a speech-recognition pass over the final mix to confirm every narration line
+is intelligible over the music. The two style references described in the brief
+were never downloaded. The third reference the client linked for v2.1 (a 60-second brand
+film on X) was downloaded once to a scratch folder outside the repo, only to study its
+structure (one narrator, no subtitles, music never ducked); nothing from it is in the repo
+or the film.

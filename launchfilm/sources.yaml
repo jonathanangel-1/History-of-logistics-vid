@@ -42,37 +42,6 @@ sources:
     license: "No known restrictions (LOC: free to use and reuse)"
     rights: *loc_rights
     accessed: *acc
-  loc_upper_nile:
-    kind: video
-    title: "Along the upper Nile"
-    date: "1908"
-    creator: "Pathé Frères / Library of Congress, AFI/Anonymous Toledo Collection"
-    page: https://www.loc.gov/item/2006641957/
-    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01161986/01161986.mp4
-    license: "No known restrictions (LOC: free to use and reuse)"
-    rights: *loc_rights
-    accessed: *acc
-    active: [0.02, 0.02, 0.98, 0.98]
-  loc_sail_drill:
-    kind: video
-    title: 'Naval apprentices at sail drill on historic ship "Constellation"'
-    date: "1900"
-    creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
-    page: https://www.loc.gov/item/00694257/
-    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047142/00047142.mp4
-    license: "No known restrictions (LOC: free to use and reuse)"
-    rights: *loc_rights
-    accessed: *acc
-  loc_columbia_cup:
-    kind: video
-    title: '"Columbia" winning the Cup'
-    date: "1899"
-    creator: "American Vitagraph Company / Library of Congress"
-    page: https://www.loc.gov/item/00694180/
-    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01202839/01202839.mp4
-    license: "No known restrictions (LOC: free to use and reuse)"
-    rights: *loc_rights
-    accessed: *acc
   loc_storm_sea:
     kind: video
     title: "A storm at sea"
@@ -104,26 +73,6 @@ sources:
     rights: *loc_rights
     accessed: *acc
     active: [0.06, 0.02, 0.94, 0.98]
-  loc_coal_dumper:
-    kind: video
-    title: "Giant coal dumper"
-    date: "1897"
-    creator: "Thomas A. Edison, Inc. / Library of Congress"
-    page: https://www.loc.gov/item/00694215/
-    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046906/00046906.mp4
-    license: "No known restrictions (LOC: free to use and reuse)"
-    rights: *loc_rights
-    accessed: *acc
-  loc_fast_mail:
-    kind: video
-    title: "Fast mail, Northern Pacific R. R."
-    date: "1897"
-    creator: "Thomas A. Edison, Inc. / Library of Congress"
-    page: https://www.loc.gov/item/00694200/
-    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047115/00047115.mp4
-    license: "No known restrictions (LOC: free to use and reuse)"
-    rights: *loc_rights
-    accessed: *acc
   loc_san_pedro:
     kind: video
     title: "Building a harbor at San Pedro"
@@ -131,16 +80,6 @@ sources:
     creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
     page: https://www.loc.gov/item/00694162/
     url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045693/00045693.mp4
-    license: "No known restrictions (LOC: free to use and reuse)"
-    rights: *loc_rights
-    accessed: *acc
-  loc_black_diamond:
-    kind: video
-    title: "New Black Diamond Express"
-    date: "1900"
-    creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
-    page: https://www.loc.gov/item/00694259/
-    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064200/00064200.mp4
     license: "No known restrictions (LOC: free to use and reuse)"
     rights: *loc_rights
     accessed: *acc
@@ -186,16 +125,6 @@ sources:
     license: "Public domain (U.S. federal government work)"
     rights: *dvids_rights
     accessed: *acc
-  dv_savannah_rail:
-    kind: video
-    title: "B-roll - Port of Savannah Rail Operations, CBP NII Operations"
-    date: "2023-06-28"
-    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
-    page: https://www.dvidshub.net/video/891551
-    url: https://d34w7g4gy10iej.cloudfront.net/video/2307/DOD_109788662/DOD_109788662.mp4
-    license: "Public domain (U.S. federal government work)"
-    rights: *dvids_rights
-    accessed: *acc
   dv_longbeach_a:
     kind: video
     title: "B-Roll - Long Beach Sea Port (package 1)"
@@ -216,16 +145,6 @@ sources:
     license: "Public domain (U.S. federal government work)"
     rights: *dvids_rights
     accessed: *acc
-  dv_longbeach_c:
-    kind: video
-    title: "B-Roll - Long Beach Sea Port (package 3)"
-    date: "2021-08-04"
-    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
-    page: https://www.dvidshub.net/video/822461
-    url: https://d34w7g4gy10iej.cloudfront.net/video/2111/DOD_108694070/DOD_108694070.mp4
-    license: "Public domain (U.S. federal government work)"
-    rights: *dvids_rights
-    accessed: *acc
   dv_container_move:
     kind: video
     title: "60th Aerial Port Squadron moves a shipping container during Exercise Ultimate Caduceus"
@@ -243,26 +162,6 @@ sources:
     creator: "U.S. Transportation Command (via DVIDS)"
     page: https://www.dvidshub.net/video/1010645
     url: https://d34w7g4gy10iej.cloudfront.net/video/2606/DOD_111769736/DOD_111769736.mp4
-    license: "Public domain (U.S. federal government work)"
-    rights: *dvids_rights
-    accessed: *acc
-  dv_cargo_timelapse:
-    kind: video
-    title: "Cargo Operations Time-lapse"
-    date: "2019-07-09"
-    creator: "386th Air Expeditionary Wing, U.S. Air Force (via DVIDS)"
-    page: https://www.dvidshub.net/video/695702
-    url: https://d34w7g4gy10iej.cloudfront.net/video/1907/DOD_106996919/DOD_106996919-1024x576-1769k.mp4
-    license: "Public domain (U.S. federal government work)"
-    rights: *dvids_rights
-    accessed: *acc
-  dv_pallets:
-    kind: video
-    title: "721st APS load pallets"
-    date: "2020-02-13"
-    creator: "86th Airlift Wing, U.S. Air Force (via DVIDS)"
-    page: https://www.dvidshub.net/video/740313
-    url: https://d34w7g4gy10iej.cloudfront.net/video/2002/DOD_107690972/DOD_107690972-1024x576-1769k.mp4
     license: "Public domain (U.S. federal government work)"
     rights: *dvids_rights
     accessed: *acc
@@ -288,6 +187,254 @@ sources:
     accessed: *acc
 
   # ---------------------------------------------------------------- NASA picture
+  # ---------------------------------------------------------------- modern build (DVIDS, v2.1)
+  dv_1011605:
+    kind: video
+    title: "Flyer Supercomputer Ribbon Cutting"
+    date: "2026-06-18"
+    creator: "Air Force Research Laboratory (via DVIDS)"
+    page: https://www.dvidshub.net/video/1011605/flyer-supercomputer-ribbon-cutting
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2606/DOD_111785876/DOD_111785876.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, Flyer Supercomputer Ribbon Cutting, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_936659:
+    kind: video
+    title: "Gallium Nitride Device (GaN)"
+    date: "2024-09-13"
+    creator: "Air Force Research Laboratory (via DVIDS)"
+    page: https://www.dvidshub.net/video/936659/gallium-nitride-device-gan
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2409/DOD_110561021/DOD_110561021.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, Gallium Nitride Device (GaN), by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_823372:
+    kind: video
+    title: "ASRS footage from Letterkenny Army Depot"
+    date: "2020-06-24"
+    creator: "Letterkenny Army Depot (via DVIDS)"
+    page: https://www.dvidshub.net/video/823372/asrs-footage-letterkenny-army-depot
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2111/DOD_108705719/DOD_108705719.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, ASRS footage from Letterkenny Army Depot, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_822436:
+    kind: video
+    title: "Leader Follower night operations mission"
+    date: "2021-11-01"
+    creator: "DEVCOM Ground Vehicle Systems Center (via DVIDS)"
+    page: https://www.dvidshub.net/video/822436/leader-follower-night-operations-mission
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2111/DOD_108693747/DOD_108693747.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, Leader Follower night operations mission, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_848006:
+    kind: video
+    title: "B-Roll - SBIRS GEO-6 loading into C-5M Super Galaxy"
+    date: "2022-05-31"
+    creator: "Space Systems Command (via DVIDS)"
+    page: https://www.dvidshub.net/video/848006/b-roll-sbirs-geo-6-loading-into-c-5m-super-galaxy
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2206/DOD_109070892/DOD_109070892.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, B-Roll - SBIRS GEO-6 loading into C-5M Super Galaxy, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_943091:
+    kind: video
+    title: "32nd APS loading C-5M Super Galaxy [B-roll]"
+    date: "2024-11-06"
+    creator: "911th Airlift Wing (via DVIDS)"
+    page: https://www.dvidshub.net/video/943091/32nd-aps-loading-c-5m-super-galaxy-b-roll
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2411/DOD_110672673/DOD_110672673.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, 32nd APS loading C-5M Super Galaxy [B-roll], by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_844294:
+    kind: video
+    title: "Operation Fly Formula C-17 Loading B-roll"
+    date: "2022-05-22"
+    creator: "86th Airlift Wing (via DVIDS)"
+    page: https://www.dvidshub.net/video/844294/operation-fly-formula-c-17-loading-b-roll
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2205/DOD_109007654/DOD_109007654.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, Operation Fly Formula C-17 Loading B-roll, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_916015:
+    kind: video
+    title: "MV Roy Benavidez (T-AKR-306) Onload"
+    date: "2024-03-15"
+    creator: "USN Military Sealift Command (via DVIDS)"
+    page: https://www.dvidshub.net/video/916015/mv-roy-benavidez-t-akr-306-onload
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2403/DOD_110183018/DOD_110183018.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, MV Roy Benavidez (T-AKR-306) Onload, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_910394:
+    kind: video
+    title: "Oahe Dam B-roll"
+    date: "2023-11-27"
+    creator: "U.S. Army Corps of Engineers, Omaha District (via DVIDS)"
+    page: https://www.dvidshub.net/video/910394/oahe-dam-b-roll
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2401/DOD_110079946/DOD_110079946.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, Oahe Dam B-roll, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_853281:
+    kind: video
+    title: "John Day Lock and Dam B-Roll taken on Aug 3, 2022"
+    date: "2022-08-03"
+    creator: "U.S. Army Corps of Engineers, Northwestern Division (via DVIDS)"
+    page: https://www.dvidshub.net/video/853281/john-day-lock-and-dam-b-roll-taken-aug-3-2022
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2208/DOD_109150130/DOD_109150130.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, John Day Lock and Dam B-Roll taken on Aug 3, 2022, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  dv_1010655:
+    kind: video
+    title: "B-Roll: MV Roy Benavidez: Departs Port of Ponce, Puerto Rico"
+    date: "2026-05-16"
+    creator: "U.S. Transportation Command (via DVIDS)"
+    page: https://www.dvidshub.net/video/1010655/b-roll-mv-roy-benavidez-departs-port-ponce-puerto-rico
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2606/DOD_111769836/DOD_111769836.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: >-
+      DVIDS item page: "PUBLIC DOMAIN". "This work, B-Roll: MV Roy Benavidez: Departs Port of Ponce, Puerto Rico, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
+      that are works of authorship prepared by U.S. Government employees as part of their official
+      duties are not eligible for copyright protection in the United States." (No insignia used as
+      a mark; no identifiable people featured.)
+    accessed: *acc
+  # ---------------------------------------------------------------- moon-shot and modern build (NASA, v2.1)
+  nasa_michoud_apollo:
+    kind: video
+    title: "Michoud Assembly Facility Historic Resource Reel (Apollo-era film)"
+    date: "1960s (reel published 2019-07-10)"
+    creator: "NASA / Marshall Space Flight Center, Michoud Assembly Facility"
+    page: https://images.nasa.gov/details/Michoud_Apollo_Work
+    url: https://images-assets.nasa.gov/video/Michoud_Apollo_Work/Michoud_Apollo_Work~orig.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+    active: [0.130, 0.002, 0.870, 0.998]
+  nasa_crawler1964:
+    kind: video
+    title: "The Crawler-Transporter: The Beginning (historical footage)"
+    date: "1964"
+    creator: "NASA / Kennedy Space Center"
+    page: https://images.nasa.gov/details/KSC-19640101-MH-NAS01-0001-The_Crawler_Transporter_The_Beginning_Historical_Footage-B_2309
+    url: https://images-assets.nasa.gov/video/KSC-19640101-MH-NAS01-0001-The_Crawler_Transporter_The_Beginning_Historical_Footage-B_2309/KSC-19640101-MH-NAS01-0001-The_Crawler_Transporter_The_Beginning_Historical_Footage-B_2309~orig.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+    active: [0.0, 0.004, 1.0, 0.996]
+  nasa_maf_cs34_prod:
+    kind: video
+    title: "Core Stage 3 & 4 Production at MAF (time-lapse)"
+    date: "2025-07-12"
+    creator: "NASA / Michoud Assembly Facility"
+    page: https://images.nasa.gov/details/MAF_2025_CS3_CS4_Production
+    url: https://images-assets.nasa.gov/video/MAF_2025_CS3_CS4_Production/MAF_2025_CS3_CS4_Production~large.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_arc_supercomp:
+    kind: video
+    title: "Ames Research Center Unveils New Modular Supercomputing Facility (B-roll)"
+    date: "2019-08-21"
+    creator: "NASA / Ames Research Center (NASA Advanced Supercomputing)"
+    page: https://images.nasa.gov/details/ARC-20190821-AAV3214-ModularSupercomputer-BRollResource-NASAWeb
+    url: https://images-assets.nasa.gov/video/ARC-20190821-AAV3214-ModularSupercomputer-BRollResource-NASAWeb/ARC-20190821-AAV3214-ModularSupercomputer-BRollResource-NASAWeb~orig.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_maf_reel2022:
+    kind: video
+    title: "Michoud Resource Reel August 2022"
+    date: "2022-08"
+    creator: "NASA / Michoud Assembly Facility"
+    page: https://images.nasa.gov/details/Michoud%20Resource%20Reel%20August%202022
+    url: https://images-assets.nasa.gov/video/Michoud%20Resource%20Reel%20August%202022/Michoud%20Resource%20Reel%20August%202022~large.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_art3_cs_waterway:
+    kind: video
+    title: "Artemis III Core Stage Arrival (waterway)"
+    date: "2026-04-27"
+    creator: "NASA / Kennedy Space Center"
+    page: https://images.nasa.gov/details/KSC-20260427-MH-CSH01-0001-Artemis_III_Core_Stage_Arrival_Waterway-M20626.MP4
+    url: https://images-assets.nasa.gov/video/KSC-20260427-MH-CSH01-0001-Artemis_III_Core_Stage_Arrival_Waterway-M20626.MP4/KSC-20260427-MH-CSH01-0001-Artemis_III_Core_Stage_Arrival_Waterway-M20626.MP4~large.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_guppy2023:
+    kind: video
+    title: "Super Guppy Arrives in Alabama to Drop Off Artemis I Heat Shield"
+    date: "2023-11-06"
+    creator: "NASA / Marshall Space Flight Center"
+    page: https://images.nasa.gov/details/NASA_MSFC_2023_Super_Guppy_Arrival
+    url: https://images-assets.nasa.gov/video/NASA_MSFC_2023_Super_Guppy_Arrival/NASA_MSFC_2023_Super_Guppy_Arrival~orig.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_rs25_2018:
+    kind: video
+    title: "RS-25 Engine Test, 2018-10-31 (full duration)"
+    date: "2018-10-31"
+    creator: "NASA / Stennis Space Center"
+    page: https://images.nasa.gov/details/2018-10-31%20-%20RS-25%20Engine%20Test%20-%204K%20Full%20Duration
+    url: https://images-assets.nasa.gov/video/2018-10-31%20-%20RS-25%20Engine%20Test%20-%204K%20Full%20Duration/2018-10-31%20-%20RS-25%20Engine%20Test%20-%204K%20Full%20Duration~large.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_react_print:
+    kind: video
+    title: "REACT 3D Printing (robotic construction printer)"
+    date: "2022-07-28"
+    creator: "NASA / Kennedy Space Center"
+    page: https://images.nasa.gov/details/KSC-20220728-MH-ILW03-0001-REACT_3D_Printing-3310260
+    url: https://images-assets.nasa.gov/video/KSC-20220728-MH-ILW03-0001-REACT_3D_Printing-3310260/KSC-20220728-MH-ILW03-0001-REACT_3D_Printing-3310260~large.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
   nasa_a11_70mm:
     kind: video
     title: "Apollo 11 launch, transfer from 70mm (KSC_69-71212)"
@@ -300,34 +447,34 @@ sources:
     accessed: *acc
     active: [0.045, 0.045, 0.955, 0.955]
 
-  # ---------------------------------------------------------------- voices (public domain)
-  vo_jfk_rice:
-    kind: audio
-    title: "Address at Rice University on the Nation's Space Effort (audio)"
-    date: "1962-09-12"
-    creator: "President John F. Kennedy; recording from the John F. Kennedy Presidential Library and Museum (NARA)"
-    page: https://commons.wikimedia.org/wiki/File:Jfk_rice_university_we_choose_to_go_to_the_moon.ogg
-    url: https://upload.wikimedia.org/wikipedia/commons/5/50/Jfk_rice_university_we_choose_to_go_to_the_moon.ogg
-    license: "Public domain (PD-USGov: U.S. federal government work)"
+  # ---------------------------------------------------------------- narration (synthetic voice)
+  tts_chatterbox:
+    kind: model
+    fetch: false  # downloaded by the chatterbox-tts package itself on first use
+    title: "Chatterbox text-to-speech model (stock voice; narrator timbre derived from it)"
+    date: "2025"
+    creator: "Resemble AI"
+    page: https://huggingface.co/ResembleAI/chatterbox
+    url: https://github.com/resemble-ai/chatterbox
+    license: "MIT"
     rights: >-
-      Commons file page: license "PD-USGov" - "This work is in the public domain in the
-      United States because it is a work prepared by an officer or employee of the United
-      States Government as part of that person's official duties under the terms of Title
-      17, Chapter 1, Section 105 of the US Code." Source: "John F. Kennedy Presidential
-      Library & Museum" (a NARA presidential library). A presidential address delivered in
-      office, recorded for the White House / JFK Library - not a network broadcast copy.
+      Model card: "license: mit". Repository LICENSE: "MIT License ... Copyright (c) 2025
+      Resemble AI". Every generated file carries Resemble AI's imperceptible Perth
+      watermark, marking the narration as synthetic.
     accessed: *acc
-  vo_a11_launch:
-    kind: av
-    title: "Video - Apollo 11 Pre-Launch and Launch (Launch Control commentary, Press Site)"
-    date: "1969-07-16"
-    creator: "NASA / Kennedy Space Center (Apollo Launch Control public affairs commentary)"
-    page: https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372
-    url: "https://images-assets.nasa.gov/video/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372~medium.mp4"
-    segment: [3360, 3425]
-    ext: .mkv
-    license: "Public domain (NASA, U.S. federal government work)"
-    rights: *nasa_rights
+
+  # ---------------------------------------------------------------- type
+  font_manrope:
+    kind: font
+    title: "Manrope (variable, wght 200-800), the site's display face"
+    date: "2018"
+    creator: "The Manrope Project Authors (via Google Fonts)"
+    page: https://github.com/google/fonts/tree/main/ofl/manrope
+    url: "https://github.com/google/fonts/raw/main/ofl/manrope/Manrope%5Bwght%5D.ttf"
+    ext: .ttf
+    license: "SIL Open Font License 1.1"
+    rights: >-
+      OFL.txt: "This Font Software is licensed under the SIL Open Font License, Version 1.1."
     accessed: *acc
 
   # ---------------------------------------------------------------- music
