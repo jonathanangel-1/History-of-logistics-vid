@@ -1,132 +1,38 @@
 {
- "_doc": "Single source of truth for picture and sound. Film positions are bars (0-based, 4/4, 128 BPM: 1 bar = 1.875 s, 1 beat = 0.46875 s). Keys ending in _s are seconds. Shot `in` is seconds in the ORIGINAL source file. c16/c9 = [center_x, center_y, zoom] of the crop inside the source's active area (zoom 1 = largest box of the output aspect). A shot runs until the next shot's `at`.",
- "bpm": 128,
+ "_doc": "Single source of truth for picture and sound. Film positions are bars (0-based, 4/4, 90 BPM: 1 bar = 2.6667 s, 1 beat = 0.6667 s) or seconds in keys ending in _s. Shot `in` is seconds in the ORIGINAL source file. c16/c9 = [center_x, center_y, zoom] of the crop inside the source's active area (zoom 1 = largest box of the output aspect). A shot runs until the next shot starts. Narration `at_s` is the onset of the first word; `split_at_s` places each item of a list read on its own beat.",
+ "bpm": 90,
  "beats_per_bar": 4,
- "total_bars": 34,
+ "total_bars": 23.625,
  "fps": 24,
  "sample_rate": 48000,
+ "encode": {
+  "crf": 18,
+  "maxrate": "9M",
+  "bufsize": "18M"
+ },
  "shots": [
   {
-   "at": 0.0,
-   "src": "loc_san_pedro",
-   "in": 76.6,
-   "look": "bw",
+   "at_s": 0.0,
+   "src": "dv_1011605",
+   "in": 102.2,
+   "note": "AI: glowing fibre in a supercomputer",
    "c16": [
     0.5,
     0.5,
     1.0
    ],
    "c9": [
-    0.4,
+    0.5,
     0.5,
     1.0
    ],
    "push": 0.06
   },
   {
-   "at": 1.0,
-   "src": "loc_san_pedro",
-   "in": 139.0,
-   "look": "bw",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 1.625,
-   "src": "loc_klondike_baggage",
-   "in": 17.5,
-   "look": "bw",
-   "c16": [
-    0.5,
-    0.45,
-    1.05
-   ],
-   "c9": [
-    0.42,
-    0.5,
-    1.0
-   ],
-   "push": 0.06
-  },
-  {
-   "at": 2.75,
-   "src": "loc_freight_train",
-   "in": 24.0,
-   "look": "bw",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ],
-   "push": 0.05
-  },
-  {
-   "at": 3.375,
-   "src": "loc_phila_express",
-   "in": 16.3,
-   "look": "bw",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 4.0,
-   "src": "loc_teutonic",
-   "in": 40.5,
-   "look": "bw",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ],
-   "push": 0.04
-  },
-  {
-   "at": 4.75,
-   "src": "loc_storm_sea",
-   "in": 23.2,
-   "look": "bw",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.3,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 5.25,
-   "src": "dv_container_move",
-   "in": 117.0,
-   "look": "desat",
+   "at_s": 1.67,
+   "src": "nasa_arc_supercomp",
+   "in": 189.6,
+   "note": "AI: server boards, memory and cold plates",
    "c16": [
     0.5,
     0.5,
@@ -140,76 +46,128 @@
    "push": 0.05
   },
   {
-   "at": 6.0,
-   "src": "dv_container_move",
-   "in": 64.0,
-   "look": "desat",
-   "c16": [
-    0.4,
-    0.55,
-    1.2
-   ],
-   "c9": [
-    0.4,
-    0.5,
-    1.0
-   ],
-   "flash": true
-  },
-  {
-   "at": 6.375,
-   "src": "dv_c17_takeoff",
-   "in": 184.0,
-   "look": "desat",
+   "at_s": 3.0,
+   "src": "px_30810444",
+   "in": 0.0,
+   "note": "how it gets built: steel frame going up, aerial",
    "c16": [
     0.5,
     0.5,
     1.0
    ],
    "c9": [
-    0.45,
+    0.5,
     0.5,
     1.0
    ]
   },
   {
-   "at": 7.25,
-   "src": "dv_c5_takeoff",
-   "in": 42.0,
-   "look": "desat",
-   "c16": [
-    0.5,
-    0.62,
-    1.25
-   ],
-   "c9": [
-    0.45,
-    0.6,
-    1.0
-   ]
-  },
-  {
-   "at": 8.0,
-   "src": "nasa_michoud_apollo",
-   "in": 87.0,
-   "look": "desat",
+   "at_s": 4.67,
+   "src": "px_34831842",
+   "in": 10.0,
+   "note": "built: concrete pour, pump booms",
    "c16": [
     0.5,
     0.5,
     1.0
    ],
    "c9": [
-    0.45,
+    0.5,
     0.5,
     1.0
    ],
    "push": 0.04
   },
   {
-   "at": 8.75,
-   "src": "nasa_crawler1964",
-   "in": 508.0,
-   "look": "desat",
+   "at_s": 6.0,
+   "src": "dv_882848",
+   "in": 2.0,
+   "note": "Transformers: HV bushings and radiator fins",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 7.33,
+   "src": "dv_787947",
+   "in": 14.0,
+   "note": "Switchgear: medium-voltage lineup",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 8.33,
+   "src": "dv_900367",
+   "in": 101.0,
+   "note": "Chillers: central energy plant chiller hall",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 9.33,
+   "src": "nasa_arc_supercomp",
+   "in": 79.6,
+   "note": "Racks: rows of supercomputer racks",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 10.33,
+   "src": "dv_1007228",
+   "in": 2.0,
+   "note": "built: glowing steel slab in a mill",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.04
+  },
+  {
+   "at_s": 11.67,
+   "src": "px_37287417",
+   "in": 5.0,
+   "note": "three continents: container ship on open ocean",
    "c16": [
     0.5,
     0.5,
@@ -222,31 +180,99 @@
    ]
   },
   {
-   "at": 9.5,
-   "src": "nasa_a11_70mm",
-   "in": 8.0,
-   "look": "launch",
+   "at_s": 12.77,
+   "src": "px_30810696",
+   "in": 0.0,
+   "note": "one site: one mega construction site, aerial",
    "c16": [
     0.5,
     0.5,
     1.0
    ],
    "c9": [
-    0.52,
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 14.33,
+   "src": "px_19912008",
+   "in": 4.0,
+   "note": "one missing part: empty hall",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 15.47,
+   "src": "px_35168445",
+   "in": 0.0,
+   "note": "a gigawatt sits dark: power lines at dusk",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
     0.5,
     1.0
    ],
    "push": 0.04,
-   "flash": true
+   "exp": -1.0,
+   "norm": false
   },
   {
-   "at": 10.25,
-   "src": "nasa_a11_70mm",
-   "in": 20.5,
-   "look": "launch",
+   "at_s": 18.0,
+   "src": "px_30528148",
+   "in": 0.0,
+   "note": "just the start: industry at sunrise",
    "c16": [
     0.5,
-    0.6,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.04
+  },
+  {
+   "at_s": 20.0,
+   "src": "dv_919537",
+   "in": 46.0,
+   "note": "Chip fabs: bunny suits in a yellow-light cleanroom",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 21.05,
+   "src": "px_29491854",
+   "in": 0.0,
+   "note": "Power plants: cooling towers",
+   "c16": [
+    0.5,
+    0.5,
     1.0
    ],
    "c9": [
@@ -256,10 +282,61 @@
    ]
   },
   {
-   "at": 10.75,
-   "src": "nasa_a11_70mm",
-   "in": 34.0,
-   "look": "launch",
+   "at_s": 22.1,
+   "src": "dv_973129",
+   "in": 75.0,
+   "note": "Drone factories: completed drones on the floor",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 23.4,
+   "src": "dv_791069",
+   "in": 146.0,
+   "note": "Drug plants: sterile vial filling line",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.04
+  },
+  {
+   "at_s": 24.45,
+   "src": "dv_993151",
+   "in": 292.3,
+   "note": "Shipyards: cranes over hulls at golden hour",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.04
+  },
+  {
+   "at_s": 25.5,
+   "src": "px_13680349",
+   "in": 0.0,
+   "note": "biggest build: forest of tower cranes",
    "c16": [
     0.5,
     0.5,
@@ -272,44 +349,188 @@
    ]
   },
   {
-   "at": 11.5,
-   "src": "nasa_maf_cs34_prod",
-   "in": 57.0,
-   "look": "full",
+   "at_s": 26.83,
+   "src": "px_13680349",
+   "in": 95.0,
+   "note": "biggest build: vast foundations from above",
    "c16": [
-    0.38,
-    0.34,
-    1.45
+    0.5,
+    0.5,
+    1.0
    ],
    "c9": [
-    0.3,
-    0.35,
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 28.0,
+   "src": "dv_712740",
+   "in": 22.2,
+   "note": "builds fastest: robotic welding arc",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 29.0,
+   "src": "px_4468754",
+   "in": 0.0,
+   "note": "fastest: robot line welding",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 29.6,
+   "src": "px_6164052",
+   "in": 0.0,
+   "note": "fastest: structure rising, time-lapse",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 31.0,
+   "src": "px_8961953",
+   "in": 0.0,
+   "note": "until it arrives: heavy haul on a mountain road",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 32.6,
+   "src": "px_16035622",
+   "in": 4.0,
+   "note": "arrives: crane sets a delivered unit",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 34.0,
+   "src": "px_30117914",
+   "in": 0.0,
+   "note": "back office: desk, typewriter, papers",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.05
+  },
+  {
+   "at_s": 35.4,
+   "src": "px_30117913",
+   "in": 10.0,
+   "note": "back office: signing paperwork",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 37.0,
+   "src": "dv_891556",
+   "in": 66.2,
+   "note": "front line: ship-to-shore crane lifts a box",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 38.0,
+   "src": "px_35907909",
+   "in": 0.0,
+   "note": "front line: container port at night, aerial",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "at_s": 40.0,
+   "src": "dv_972803",
+   "in": 143.3,
+   "note": "Air: C-5M lifting off",
+   "c16": [
+    0.52,
+    0.48,
     1.2
    ],
-   "push": 0.05
-  },
-  {
-   "at": 12.5,
-   "src": "nasa_arc_supercomp",
-   "in": 78.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
    "c9": [
     0.5,
     0.5,
     1.0
-   ],
-   "push": 0.05
+   ]
   },
   {
-   "at": 13.0,
-   "src": "dv_1011605",
-   "in": 73.0,
-   "look": "night",
+   "at_s": 40.67,
+   "src": "px_2943126",
+   "in": 0.0,
+   "note": "Ocean: container ship at sea",
    "c16": [
     0.5,
     0.5,
@@ -322,417 +543,26 @@
    ]
   },
   {
-   "at": 13.25,
-   "src": "dv_936659",
-   "in": 27.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "push": 0.04
-  },
-  {
-   "at": 13.75,
-   "src": "dv_936659",
-   "in": 31.4,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 14.0,
-   "src": "dv_823372",
-   "in": 101.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 14.25,
-   "src": "nasa_react_print",
-   "in": 33.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.55,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 14.5,
-   "src": "dv_910394",
-   "in": 8.5,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 14.75,
-   "src": "dv_853281",
-   "in": 100.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 15.0,
-   "src": "dv_848006",
-   "in": 16.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "push": 0.05
-  },
-  {
-   "at": 15.5,
-   "src": "dv_943091",
-   "in": 251.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 16.0,
-   "src": "nasa_maf_reel2022",
-   "in": 26.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "flash": true
-  },
-  {
-   "at": 16.5,
-   "src": "nasa_maf_reel2022",
-   "in": 103.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 17.0,
-   "src": "nasa_art3_cs_waterway",
-   "in": 60.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.62,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 17.25,
-   "src": "nasa_guppy2023",
-   "in": 88.0,
-   "look": "full",
-   "c16": [
-    0.28,
-    0.55,
-    1.5
-   ],
-   "c9": [
-    0.26,
-    0.5,
-    1.0
-   ],
-   "push": 0.04
-  },
-  {
-   "at": 17.75,
-   "src": "dv_848006",
-   "in": 80.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 18.25,
-   "src": "dv_savannah_port",
-   "in": 410.0,
-   "look": "night",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.55,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 18.5,
-   "src": "dv_1010655",
-   "in": 13.8,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 19.25,
-   "src": "dv_savannah_gate",
-   "in": 229.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 19.75,
-   "src": "dv_844294",
-   "in": 29.0,
-   "look": "night",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 20.0,
-   "src": "dv_844294",
-   "in": 280.0,
-   "look": "night",
+   "at_s": 41.42,
+   "src": "px_18749847",
+   "in": 3.6,
+   "note": "Ground: semi on a desert highway at dusk",
    "c16": [
     0.45,
-    0.5,
-    1.1
-   ],
-   "c9": [
-    0.4,
-    0.5,
-    1.0
-   ],
-   "push": 0.05,
-   "flash": true
-  },
-  {
-   "at": 20.75,
-   "src": "dv_916015",
-   "in": 3.8,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 21.125,
-   "src": "dv_sealift_dusk",
-   "in": 11.6,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
     0.6,
-    0.5,
-    1.0
-   ],
-   "push": 0.05
-  },
-  {
-   "at": 22.0,
-   "src": "dv_longbeach_a",
-   "in": 137.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.76,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 22.5,
-   "src": "dv_822436",
-   "in": 16.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 23.0,
-   "src": "nasa_rs25_2018",
-   "in": 30.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
+    1.6
    ],
    "c9": [
     0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 23.375,
-   "src": "dv_c5_takeoff",
-   "in": 155.0,
-   "look": "full",
-   "c16": [
-    0.55,
-    0.5,
-    1.3
-   ],
-   "c9": [
     0.6,
-    0.5,
     1.0
    ]
   },
   {
-   "at": 23.75,
-   "src": "dv_c17_takeoff",
-   "in": 52.0,
-   "look": "full",
-   "c16": [
-    0.32,
-    0.36,
-    1.5
-   ],
-   "c9": [
-    0.3,
-    0.4,
-    1.2
-   ]
-  },
-  {
-   "at": 24.0,
-   "src": "nasa_maf_reel2022",
-   "in": 680.0,
-   "look": "full",
+   "at_s": 42.12,
+   "src": "dv_829370",
+   "in": 38.0,
+   "note": "Customs: non-intrusive inspection truck between containers",
    "c16": [
     0.5,
     0.5,
@@ -746,10 +576,10 @@
    "push": 0.04
   },
   {
-   "at": 24.5,
-   "src": "dv_savannah_cargo",
-   "in": 170.0,
-   "look": "full",
+   "at_s": 43.33,
+   "src": "dv_891556",
+   "in": 205.0,
+   "note": "Built for the build: container hoisted against the sky",
    "c16": [
     0.5,
     0.5,
@@ -760,29 +590,13 @@
     0.5,
     1.0
    ],
-   "glitch": true
+   "push": 0.04
   },
   {
-   "at": 24.75,
-   "src": "dv_1011605",
-   "in": 104.5,
-   "look": "night",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 25.0,
-   "src": "nasa_maf_reel2022",
-   "in": 245.0,
-   "look": "full",
+   "at_s": 46.0,
+   "src": "px_30524233",
+   "in": 18.0,
+   "note": "breath: port at sunset",
    "c16": [
     0.5,
     0.5,
@@ -795,10 +609,27 @@
    ]
   },
   {
-   "at": 25.25,
-   "src": "dv_936659",
-   "in": 11.0,
-   "look": "full",
+   "at_s": 48.0,
+   "src": "dv_993144",
+   "in": 8.1,
+   "note": "They build the future: grinder spark shower",
+   "c16": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "c9": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "push": 0.04
+  },
+  {
+   "at_s": 49.33,
+   "src": "px_33880927",
+   "in": 6.0,
+   "note": "They build the future: ironworkers at height",
    "c16": [
     0.5,
     0.5,
@@ -811,26 +642,10 @@
    ]
   },
   {
-   "at": 25.5,
-   "src": "dv_848006",
-   "in": 144.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.45,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 25.625,
-   "src": "dv_1010655",
-   "in": 151.6,
-   "look": "full",
+   "at_s": 50.67,
+   "src": "px_11041872",
+   "in": 8.0,
+   "note": "We deliver it: ship heading out to sea",
    "c16": [
     0.5,
     0.5,
@@ -841,29 +656,13 @@
     0.5,
     1.0
    ],
-   "glitch": true
+   "push": 0.04
   },
   {
-   "at": 25.75,
-   "src": "dv_container_move",
-   "in": 130.0,
-   "look": "full",
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.5,
-    0.5,
-    1.0
-   ]
-  },
-  {
-   "at": 25.875,
-   "src": "nasa_a11_70mm",
-   "in": 42.0,
-   "look": "launch",
+   "at_s": 53.33,
+   "src": "px_35907889",
+   "in": 0.0,
+   "closing": true,
    "c16": [
     0.5,
     0.5,
@@ -874,293 +673,178 @@
     0.5,
     1.0
    ],
-   "flash": true
-  },
-  {
-   "at": 26.0,
-   "src": "black"
-  },
-  {
-   "at": 28.0,
-   "src": "brand_bg",
-   "bg": "dv_sealift_dusk",
-   "in": 11.8,
-   "push": 0.07,
-   "c16": [
-    0.5,
-    0.5,
-    1.0
-   ],
-   "c9": [
-    0.62,
-    0.5,
-    1.0
-   ],
-   "speed": 0.35
+   "push": 0.05
   }
  ],
  "titles": [
   {
-   "at_s": 49.05,
-   "end_s": 50.72,
+   "at_s": 48.0,
+   "end_s": 50.5,
    "style": "closing",
-   "text": "Software ate the world.",
-   "step_s": 0.37
+   "text": "They build the future.",
+   "fade_in_s": 0.4,
+   "fade_out_s": 0.3
   },
   {
-   "at_s": 50.85,
-   "end_s": 52.4,
+   "at_s": 50.67,
+   "end_s": 53.1,
    "style": "closing",
-   "text": "Somebody has to ship it.",
-   "step_s": 0.28
+   "text": "We deliver it.",
+   "fade_in_s": 0.4,
+   "fade_out_s": 0.3
   }
  ],
  "music": {
-  "src": "mus_rynos",
-  "gain_db": -6.5,
-  "carve_af": "equalizer=f=2500:t=q:w=1.1:g=-3.5,equalizer=f=450:t=q:w=1.2:g=-1.5",
+  "src": "mus_uprising",
+  "gain_db": -4.0,
+  "carve_af": "equalizer=f=2600:t=q:w=1.1:g=-3,equalizer=f=500:t=q:w=1.2:g=-1.5",
   "segments": [
    {
     "at": 0,
-    "src_bar": 48,
-    "bars": 18,
-    "fade_in_s": 0.004
+    "src_s": 25.665,
+    "bars": 7,
+    "fade_in_s": 0.004,
+    "note": "opening build (track 0:25.7-0:44.3)"
    },
    {
-    "at": 18,
-    "src_bar": 74,
-    "bars": 16,
-    "fade_out_s": 2.4
+    "at": 7,
+    "src_s": 92.32,
+    "bars": 15,
+    "note": "lift, break under the closing lines, hit on the logo (track 1:32.3-2:12.3)"
+   },
+   {
+    "at": 22,
+    "src_s": 194.03,
+    "bars": 1.625,
+    "fade_out_s": 0.8,
+    "note": "final chord ringing out (track 3:14.0-3:18.4)"
    }
   ]
  },
- "sfx": [
-  {
-   "src": "sfx_steam_whistle",
-   "in": 2.5,
-   "out": 5.8,
-   "at_s": 5.0,
-   "gain_db": -15,
-   "fade_in_s": 0.05,
-   "fade_out_s": 1.0
-  },
-  {
-   "src": "sfx_steam_loco",
-   "in": 30.0,
-   "out": 37.0,
-   "at_s": 5.1,
-   "gain_db": -17,
-   "fade_in_s": 0.3,
-   "fade_out_s": 1.5
-  },
-  {
-   "src": "sfx_ship_horn",
-   "in": 12.3,
-   "out": 17.2,
-   "at_s": 7.35,
-   "gain_db": -17,
-   "lp_hz": 900,
-   "fade_in_s": 0.3,
-   "fade_out_s": 1.6
-  },
-  {
-   "src": "dv_longbeach_b",
-   "in": 298.95,
-   "out": 300.6,
-   "at": 6.0,
-   "gain_db": 5,
-   "fade_in_s": 0.0,
-   "fade_out_s": 0.6,
-   "hp_hz": 60
-  },
-  {
-   "src": "dv_c5_takeoff",
-   "in": 160.0,
-   "out": 168.0,
-   "at": 6.375,
-   "gain_db": -12,
-   "fade_in_s": 0.6,
-   "fade_out_s": 1.2
-  },
-  {
-   "src": "sfx_rs25",
-   "in": 10.8,
-   "out": 15.4,
-   "at": 9.5,
-   "gain_db": 2,
-   "lp_hz": 2200,
-   "fade_in_s": 0.02,
-   "fade_out_s": 1.0
-  },
-  {
-   "src": "sfx_rs25",
-   "in": 20.0,
-   "out": 22.5,
-   "at": 23.0,
-   "gain_db": -6,
-   "lp_hz": 1800,
-   "fade_in_s": 0.05,
-   "fade_out_s": 0.6
-  }
- ],
+ "sfx": [],
  "reveal": {
-  "at": 28.0,
-  "logo_w_16x9": 820,
-  "logo_w_9x16": 760,
+  "at_s": 53.333,
+  "logo_w_16x9": 720,
+  "logo_w_9x16": 700,
   "square_frames": 4,
   "letters_delay_frames": 6,
   "letters_frames": 16,
-  "bg_opacity": 0.16
+  "bg_level": 0.32
  },
  "endcard": {
-  "at": 29.0,
-  "eyebrow": "INTERNATIONAL FREIGHT FORWARDING \u00b7 SINCE 2000",
-  "headline": [
-   "Global freight.",
-   "Clear visibility."
-  ],
-  "services_line": "Air, ocean, customs and white-glove delivery.",
-  "nodes": [
-   {
-    "label": "01 \u00b7 AIR GATEWAY",
-    "name": "Ben Gurion Airport"
-   },
-   {
-    "label": "02 \u00b7 OCEAN GATEWAYS",
-    "name": "Haifa & Ashdod ports"
-   },
-   {
-    "label": "03 \u00b7 CUSTOMS AT THE PORTS",
-    "name": "In-house brokerage"
-   }
-  ],
-  "coverage": "ISRAEL \u00b7 U.S. \u00b7 WORLDWIDE",
-  "url": "volumeba.com"
+  "at_s": 56.0,
+  "line": "Built for the build.",
+  "url": "volumeba.com",
+  "logo_w_end": 0.72,
+  "notice": "Includes U.S. Department of Defense visual information; its appearance does not imply or constitute DoD endorsement."
  },
  "narration": {
-  "model": "tts_chatterbox",
+  "model": "tts_edge",
   "recorded_dir": "narration_recorded",
-  "chatterbox": {
-   "seed": 7,
-   "takes": 4,
-   "exaggeration": 0.45,
-   "cfg_weight": 0.3,
-   "temperature": 0.8,
-   "reference_text": "Every great journey begins with a single decision. We cross oceans, we build cities, and we carry the weight of the world on our shoulders. And when the work is done, we look to the horizon, and we go again.",
-   "reference_seed": 7,
-   "reference_pitch": 0.84,
-   "f0_range_hz": [
-    85,
-    125
+  "edge": {
+   "voice": "en-US-GuyNeural",
+   "session_rates": [
+    "-8%",
+    "-4%"
    ],
-   "f0_target_hz": 102
+   "line_rates": [
+    "-10%",
+    "-6%"
+   ]
   },
-  "chain_af": "highpass=f=70,equalizer=f=140:t=q:w=0.9:g=2.5,equalizer=f=320:t=q:w=1.2:g=-1.5,equalizer=f=3300:t=q:w=1.4:g=2.5,deesser=i=0.35,acompressor=threshold=-22dB:ratio=3.5:attack=4:release=90:makeup=3",
+  "chain_af": "highpass=f=70,equalizer=f=160:t=q:w=1.0:g=1.5,equalizer=f=3200:t=q:w=1.4:g=1.5,deesser=i=0.25,acompressor=threshold=-20dB:ratio=2.5:attack=5:release=120:makeup=2",
   "level_dbfs": -17.0,
   "lines": [
    {
-    "id": "n01",
-    "at_s": 0.47,
-    "text": "Every time the world built something big,"
+    "id": "v01",
+    "text": "Everyone's talking about AI.",
+    "at_s": 0.35
    },
    {
-    "id": "n02",
-    "at_s": 3.05,
-    "text": "somebody had to move it."
+    "id": "v02",
+    "text": "Nobody's talking about how it gets built.",
+    "at_s": 3.0
    },
    {
-    "id": "n03",
-    "at_s": 5.16,
-    "text": "Rails, across a continent."
-   },
-   {
-    "id": "n04",
-    "at_s": 7.5,
-    "text": "Steam, across the ocean."
-   },
-   {
-    "id": "n05",
-    "at_s": 9.84,
-    "text": "Then we put the world in a box,"
-   },
-   {
-    "id": "n06",
-    "at_s": 12.0,
-    "text": "and gave it wings."
-   },
-   {
-    "id": "n07",
-    "at_s": 15.23,
-    "text": "Even the Moon had to be shipped."
-   },
-   {
-    "id": "n08",
-    "at_s": 21.56,
-    "text": "Now, we're building again."
-   },
-   {
-    "id": "n09",
-    "text": "Data centers. Microchips. Robots. Power. Defense.",
+    "id": "v03",
+    "text": "Transformers. Switchgear. Chillers. Racks.",
     "split_at_s": [
-     23.44,
-     24.84,
-     26.25,
-     27.19,
-     28.13
+     6.0,
+     7.33,
+     8.33,
+     9.33
     ]
    },
    {
-    "id": "n14",
-    "at_s": 30.2,
-    "text": "The biggest build of our lifetime."
+    "id": "v04",
+    "text": "Built on three continents. Needed on one site.",
+    "at_s": 10.33
    },
    {
-    "id": "n15",
-    "at_s": 32.4,
-    "text": "And every piece of it has to move."
+    "id": "v05",
+    "text": "One missing part, and a gigawatt sits dark.",
+    "at_s": 14.33
    },
    {
-    "id": "n16",
-    "text": "Across oceans. Through borders. On time.",
+    "id": "v06",
+    "text": "And AI is just the start.",
+    "at_s": 18.0
+   },
+   {
+    "id": "v07",
+    "text": "Chip fabs. Power plants. Drone factories. Drug plants. Shipyards.",
     "split_at_s": [
-     34.72,
-     36.1,
-     37.0
+     20.0,
+     21.05,
+     22.1,
+     23.4,
+     24.45
     ]
    },
    {
-    "id": "n17",
-    "at_s": 37.73,
-    "text": "This isn't just freight anymore."
+    "id": "v08",
+    "text": "The biggest build in a generation.",
+    "at_s": 25.5
    },
    {
-    "id": "n18",
-    "at_s": 39.6,
-    "text": "It's the mission."
+    "id": "v09",
+    "text": "It goes to whoever builds fastest.",
+    "at_s": 28.0
    },
    {
-    "id": "n19",
-    "at_s": 41.5,
-    "text": "And logistics has to step up."
+    "id": "v10",
+    "text": "And nothing gets built until it arrives.",
+    "at_s": 31.0
    },
    {
-    "id": "n20",
-    "at_s": 43.8,
-    "text": "Bigger. Faster. Built for it."
+    "id": "v11",
+    "text": "Logistics used to be the back office.",
+    "at_s": 34.0
    },
    {
-    "id": "n21",
-    "at_s": 49.05,
-    "text": "Software ate the world."
+    "id": "v12",
+    "text": "Now it's the front line.",
+    "at_s": 37.0
    },
    {
-    "id": "n22",
-    "text": "Somebody has to ship it. Volume.",
+    "id": "v13",
+    "text": "Air. Ocean. Ground. Customs.",
     "split_at_s": [
-     50.85,
-     52.97
-    ],
-    "takes": 6
+     40.0,
+     40.67,
+     41.42,
+     42.12
+    ]
+   },
+   {
+    "id": "v14",
+    "text": "Built for the build.",
+    "at_s": 43.33
+   },
+   {
+    "id": "v15",
+    "text": "Volume.",
+    "at_s": 53.4
    }
   ]
  }

@@ -36,16 +36,19 @@ def rows():
             "where_in_film": note,
         })
 
+    from launchfilm.picture import shot_speed
     shots = cs["shots"]
     for i, s in enumerate(shots):
-        t0 = cs.t(s["at"])
-        t1 = cs.t(shots[i + 1]["at"]) if i + 1 < len(shots) else cs.duration
-        sid = s.get("bg") if s["src"] == "brand_bg" else s["src"]
-        if sid in (None, "black", "charcoal"):
+        t0 = cs.when(s)
+        t1 = cs.when(shots[i + 1]) if i + 1 < len(shots) else cs.duration
+        sid = s["src"]
+        if sid in (None, "black"):
             continue
-        speed = s.get("speed", 1.0)
-        note = "picture, low-opacity background under the logo reveal" if s["src"] == "brand_bg" \
-            else f"picture ({s.get('look', 'full')} grade)"
+        speed = shot_speed(s, cs.fps, src)
+        note = "picture, dimmed under the logo and end card" if s.get("closing") else \
+            f"picture: {s.get('note', '')}".rstrip(": ")
+        if s.get("blur"):
+            note += " (markings blurred)"
         add("footage", sid, s["in"], s["in"] + (t1 - t0) * speed, t0, t1, note)
     nc = cs["narration"]
     dec = lambda p, sr: audio.decode_file(p, sr).mean(axis=1)
@@ -56,11 +59,11 @@ def rows():
                 f"narration line {line['id']} (synthetic voice): \u201c{line['text']}\u201d")
     m = cs["music"]
     ms = src[m["src"]]
-    bar = 4 * 60.0 / ms["bpm"]
     for seg in m["segments"]:
-        a = ms["first_beat_s"] + seg["src_bar"] * bar
-        add("music", m["src"], a, a + seg["bars"] * bar, cs.t(seg["at"]), cs.t(seg["at"]) + seg["bars"] * bar,
-            f"music bed (track bars {seg['src_bar']}-{seg['src_bar'] + seg['bars']:g})")
+        a, b = audio.segment_src(seg, ms)
+        t0 = cs.t(seg["at"])
+        t1 = min(cs.duration, t0 + b - a)
+        add("music", m["src"], a, a + t1 - t0, t0, t1, f"music: {seg.get('note', 'score')}")
     for e in cs["sfx"]:
         t = cs.when(e)
         add("sfx", e["src"], e["in"], e["out"], t, t + e["out"] - e["in"], "sound effect / natural sound")
@@ -75,17 +78,19 @@ def write():
         w.writeheader()
         w.writerows(rs)
     src = load_sources()
-    lines = ["# Credits: Volume launch film (v2)", "",
+    lines = ["# Credits: Volume launch film (v3)", "",
              "Every clip, voice line, music cue and sound effect in the film, generated from "
              "`sources.yaml` and the uses in `cuesheet.json` by `python3 -m launchfilm.render --credits`. "
-             "Times are mm:ss.sss; `film` columns are positions in the 60-second hero cut (the vertical cut "
+             "Times are mm:ss.sss; `film` columns are positions in the 16:9 cut (the vertical cut "
              "uses the same timeline).", ""]
-    ms = src["mus_rynos"]
+    ms = src[cs["music"]["src"]]
     lines += ["## Required attribution (music, CC BY 4.0)", "",
-              "> \"Rynos Theme\" Kevin MacLeod (incompetech.com)  ",
-              "> Licensed under Creative Commons: By Attribution 4.0 License  ",
-              "> http://creativecommons.org/licenses/by/4.0/", "",
+              f"> {ms['attribution']}", "",
               "Include this line in the post text or description wherever the film is published.", ""]
+    stock = sorted({src[r["clip_id"]]["creator"] for r in rs if src[r["clip_id"]]["license"].startswith("Pexels")})
+    if stock:
+        lines += ["## Stock footage (Pexels License: attribution not required, given as courtesy)", "",
+                  ", ".join(stock), ""]
     lines += ["## Sources", ""]
     used = {r["clip_id"] for r in rs}
     for sid, s in src.items():

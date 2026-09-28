@@ -105,6 +105,15 @@ def true_peak_limit(x, sr, ceiling_db, lookahead=0.004, release=0.08):
     return x * g[:, None]
 
 
+def segment_src(seg, ms):
+    """Source window [a, b) in seconds of a music segment: `src_s` (a measured downbeat;
+    the track's tempo drifts by tens of ms, so edits are anchored to onsets) or `src_bar`
+    on the track's nominal grid, `bars` long at the track's tempo."""
+    bar_src = 4 * 60.0 / ms["bpm"]
+    a = seg["src_s"] if "src_s" in seg else ms["first_beat_s"] + seg["src_bar"] * bar_src
+    return a, a + seg["bars"] * bar_src
+
+
 def build(out_path=None, stems=False):
     cs = Cues()
     sources = load_sources()
@@ -117,13 +126,12 @@ def build(out_path=None, stems=False):
     # ---- music: whole phrases of the track at one constant level (no ducking, no sweeps)
     m = cs["music"]
     ms = sources[m["src"]]
-    bar_src = 4 * 60.0 / ms["bpm"]
     track = decode(m["src"], sources=sources, af=m.get("carve_af"))
     for seg in m["segments"]:
-        a = ms["first_beat_s"] + seg["src_bar"] * bar_src
+        a, b = segment_src(seg, ms)
         pre = 0.006  # start a hair early so the downbeat transient is intact
         i0 = int(round((a - pre) * sr))
-        i1 = int(round((a + seg["bars"] * bar_src) * sr))
+        i1 = int(round(b * sr))
         x = track[i0:i1].copy()
         x = fades(x, sr, seg.get("fade_in_s", 0.004), seg.get("fade_out_s", 0.004))
         place(music, x, cs.t(seg["at"]) - pre, sr)

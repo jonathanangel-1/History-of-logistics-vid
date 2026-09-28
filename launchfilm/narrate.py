@@ -1,9 +1,9 @@
 """Narration: one voice for the whole film, one WAV per cue-sheet line.
 
-Every line is read in several seeded takes with Chatterbox (Resemble AI, MIT) and the
-best take is kept (see tts_chatterbox.py). Chatterbox pins its own torch/numpy, so it
-runs in the Python named by $CHATTERBOX_PYTHON. A recorded read replaces any line
-automatically: drop `<line id>.wav` into `recorded_dir`.
+`narration.model` picks the engine: `tts_edge` (Microsoft neural voice, several takes per
+line, best kept; see tts_edge.py) or `tts_chatterbox` (v2). The engine runs in the Python
+named by $NARRATOR_PYTHON (it needs torch for the take scoring). A recorded read replaces
+any line automatically: drop `<line id>.wav` into `recorded_dir`.
 """
 import hashlib
 import json
@@ -19,8 +19,11 @@ OUT_DIR = WORK / "narration"
 LEAD_S = 0.03  # every file starts exactly this long before its first word
 
 
+ENGINE_CFG = {"tts_edge": "edge", "tts_chatterbox": "chatterbox"}
+
+
 def _key(cfg, line):
-    blob = json.dumps([cfg["chatterbox"], line["text"], line.get("takes"),
+    blob = json.dumps([cfg[ENGINE_CFG[cfg["model"]]], line["text"], line.get("takes"),
                        line.get("exaggeration"), line.get("cfg_weight")], sort_keys=True)
     return hashlib.sha1(blob.encode()).hexdigest()[:12]
 
@@ -78,23 +81,31 @@ def placements(line, cfg, sr=48000, decode=None):
     return [(line["at_s"], trim(x, sr))]
 
 
+def _job(cfg, todo):
+    if cfg["model"] == "tts_edge":
+        return {"edge": cfg["edge"], "work_dir": str(OUT_DIR / "takes"),
+                "report_path": str(OUT_DIR / "takes_report.json"),
+                "all_lines": [{"id": l["id"], "text": l["text"]} for l in cfg["lines"]],
+                "lines": [dict(l, out=str(line_path(l, cfg))) for l in todo]}
+    cb = cfg["chatterbox"]
+    refkey = hashlib.sha1(json.dumps([cb["reference_text"], cb["reference_seed"],
+                                      cb["reference_pitch"]]).encode()).hexdigest()[:12]
+    return {"chatterbox": cb, "reference_path": str(OUT_DIR / f"reference_{refkey}.wav"),
+            "report_path": str(OUT_DIR / "takes_report.json"),
+            "lines": [dict(l, n=i, out=str(line_path(l, cfg)))
+                      for i, l in enumerate(cfg["lines"]) if l in todo]}
+
+
 def build(force=False):
     import soundfile as sf
     cfg = Cues()["narration"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     todo = [l for l in cfg["lines"] if force or not line_path(l, cfg).exists()]
     if todo:
-        cb = cfg["chatterbox"]
-        refkey = hashlib.sha1(json.dumps([cb["reference_text"], cb["reference_seed"],
-                                          cb["reference_pitch"]]).encode()).hexdigest()[:12]
-        job = {"chatterbox": cb, "reference_path": str(OUT_DIR / f"reference_{refkey}.wav"),
-               "report_path": str(OUT_DIR / "takes_report.json"),
-               "lines": [dict(l, n=i, out=str(line_path(l, cfg)))
-                         for i, l in enumerate(cfg["lines"]) if l in todo]}
         job_path = OUT_DIR / "job.json"
-        job_path.write_text(json.dumps(job, indent=1))
-        py = os.environ.get("CHATTERBOX_PYTHON", sys.executable)
-        subprocess.run([py, "-m", "launchfilm.tts_chatterbox", str(job_path)], cwd=ROOT, check=True)
+        job_path.write_text(json.dumps(_job(cfg, todo), indent=1))
+        py = os.environ.get("NARRATOR_PYTHON", os.environ.get("CHATTERBOX_PYTHON", sys.executable))
+        subprocess.run([py, "-m", f"launchfilm.{cfg['model']}", str(job_path)], cwd=ROOT, check=True)
         for l in todo:
             p = line_path(l, cfg)
             y, sr = sf.read(str(p))
