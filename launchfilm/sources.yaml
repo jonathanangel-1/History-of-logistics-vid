@@ -202,20 +202,6 @@ sources:
       duties are not eligible for copyright protection in the United States." (No insignia used as
       a mark; no identifiable people featured.)
     accessed: *acc
-  dv_965277:
-    kind: video
-    title: "High-Performance Computing + Artificial Intelligence – Machine Learning + Cybersecurity = Point of Need Solutions - Unbranded"
-    date: "2025-06-04"
-    creator: "U.S. Army Corps of Engineers, Engineer Research and Development Center (via DVIDS)"
-    page: https://www.dvidshub.net/video/965277/high-performance-computing-artificial-intelligence-machine-learning-cybersecurity-point-need-solutions-unbranded
-    url: https://d34w7g4gy10iej.cloudfront.net/video/2506/DOD_111045750/DOD_111045750.mp4
-    license: "Public domain (U.S. federal government work)"
-    rights: >-
-      DVIDS item page: "PUBLIC DOMAIN". "This work, High-Performance Computing + Artificial Intelligence – Machine Learning + Cybersecurity = Point of Need Solutions - Unbranded, by ..., identified by DVIDS, must comply with the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In general, DoW VI
-      that are works of authorship prepared by U.S. Government employees as part of their official
-      duties are not eligible for copyright protection in the United States." (No insignia used as
-      a mark; no identifiable people featured.)
-    accessed: *acc
   dv_936659:
     kind: video
     title: "Gallium Nitride Device (GaN)"
@@ -436,6 +422,16 @@ sources:
     creator: "NASA / Stennis Space Center"
     page: https://images.nasa.gov/details/2018-10-31%20-%20RS-25%20Engine%20Test%20-%204K%20Full%20Duration
     url: https://images-assets.nasa.gov/video/2018-10-31%20-%20RS-25%20Engine%20Test%20-%204K%20Full%20Duration/2018-10-31%20-%20RS-25%20Engine%20Test%20-%204K%20Full%20Duration~large.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  nasa_react_print:
+    kind: video
+    title: "REACT 3D Printing (robotic construction printer)"
+    date: "2022-07-28"
+    creator: "NASA / Kennedy Space Center"
+    page: https://images.nasa.gov/details/KSC-20220728-MH-ILW03-0001-REACT_3D_Printing-3310260
+    url: https://images-assets.nasa.gov/video/KSC-20220728-MH-ILW03-0001-REACT_3D_Printing-3310260/KSC-20220728-MH-ILW03-0001-REACT_3D_Printing-3310260~large.mp4
     license: "Public domain (NASA, U.S. federal government work)"
     rights: *nasa_rights
     accessed: *acc
