@@ -64,7 +64,7 @@ class ShotReader:
         self.proc = subprocess.Popen(
             ["ffmpeg", "-v", "error", "-ss", f"{t_in:.3f}", "-i", str(path), "-t", f"{dur:.3f}",
              "-vf", vf, "-an", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
-            stdout=subprocess.PIPE)
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         self.last = None
         self.i = 0
 
