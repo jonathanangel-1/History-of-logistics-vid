@@ -187,7 +187,7 @@ def draw_captions(img, cs, fmt, t):
                 continue
             rgba = T.render_text(txt, "caption", fmt, W)
             cy = H - 150 if fmt == "16x9" else 1390
-            T.scrim(img, cy + 12, 150, 0.32, W / 2, rgba.shape[1] * 1.5 + 80)
+            T.scrim(img, cy + 12, 160, 0.5, W / 2, rgba.shape[1] * 1.4 + 120)
             T.composite(img, rgba, W / 2, cy, 1.0)
             lab = T.render_text(v["label"], "label", fmt, W, color="gold_bright")
             T.composite(img, lab, W / 2, cy + rgba.shape[0] / 2 + 26, 0.9)

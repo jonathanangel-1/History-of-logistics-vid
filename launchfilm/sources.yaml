@@ -236,6 +236,16 @@ sources:
     license: "Public domain (U.S. federal government work)"
     rights: *dvids_rights
     accessed: *acc
+  dv_sealift_dusk:
+    kind: video
+    title: "B-Roll: MV Roy Benavidez: Sunset into Night"
+    date: "2026-05-18"
+    creator: "U.S. Transportation Command (via DVIDS)"
+    page: https://www.dvidshub.net/video/1010645
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2606/DOD_111769736/DOD_111769736.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
   dv_cargo_timelapse:
     kind: video
     title: "Cargo Operations Time-lapse"
