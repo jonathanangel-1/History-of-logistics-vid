@@ -1,0 +1,383 @@
+# Every external input to the film. `python3 -m launchfilm.render --fetch` downloads
+# each `url` into cache/sources/ (git-ignored). Rights were checked on each item's own
+# page on the `accessed` date; `rights` quotes that page (or the collection's stated
+# terms where the item page defers to them).
+#
+# Optional keys:
+#   segment: [start_s, end_s]  fetch only this window (re-encoded); cue sheet times stay
+#                              in the ORIGINAL file's timeline.
+#   active: [x0, y0, x1, y1]   usable picture area (fractions), excludes film borders.
+#   ext:                       local file extension if the URL has none.
+
+defaults:
+  accessed: &acc "2026-09-28"
+  loc_rights: &loc_rights >-
+    "The Library of Congress is not aware of any U.S. copyright or other restrictions in
+    the vast majority of motion pictures in these collections. Absent any such
+    restrictions, these materials are free to use and reuse."
+  dvids_rights: &dvids_rights >-
+    DVIDS item page: "PUBLIC DOMAIN". "This work ... identified by DVIDS, must comply with
+    the restrictions shown on https://www.dvidshub.net/about/copyright." Those terms: "In
+    general, DoW VI that are works of authorship prepared by U.S. Government employees as
+    part of their official duties are not eligible for copyright protection in the United
+    States." (No insignia used as a mark; no identifiable people featured.)
+  nasa_rights: &nasa_rights >-
+    NASA Image and Video Library, NASA media usage guidelines: "NASA content - images,
+    audio, video, and computer files used in the rendition of 3-dimensional models ... -
+    generally are not subject to copyright in the United States." Work of the U.S. federal
+    government (17 U.S.C. 105).
+  cc0_rights: &cc0_rights >-
+    Wikimedia Commons file page: "Creative Commons Zero, Public Domain Dedication"
+    (CC0 1.0, http://creativecommons.org/publicdomain/zero/1.0/).
+
+sources:
+  # ---------------------------------------------------------------- archival picture (LOC)
+  loc_klondike_baggage:
+    kind: video
+    title: 'Loading baggage for Klondike, no. 6'
+    date: "1897"
+    creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
+    page: https://www.loc.gov/item/00694237/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047135/00047135.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_upper_nile:
+    kind: video
+    title: "Along the upper Nile"
+    date: "1908"
+    creator: "Pathé Frères / Library of Congress, AFI/Anonymous Toledo Collection"
+    page: https://www.loc.gov/item/2006641957/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01161986/01161986.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+    active: [0.02, 0.02, 0.98, 0.98]
+  loc_sail_drill:
+    kind: video
+    title: 'Naval apprentices at sail drill on historic ship "Constellation"'
+    date: "1900"
+    creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
+    page: https://www.loc.gov/item/00694257/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047142/00047142.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_columbia_cup:
+    kind: video
+    title: '"Columbia" winning the Cup'
+    date: "1899"
+    creator: "American Vitagraph Company / Library of Congress"
+    page: https://www.loc.gov/item/00694180/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01202839/01202839.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_storm_sea:
+    kind: video
+    title: "A storm at sea"
+    date: "1900"
+    creator: "Thomas A. Edison, Inc. / Library of Congress"
+    page: https://www.loc.gov/item/00694309/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047156/00047156.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_freight_train:
+    kind: video
+    title: "Freight train"
+    date: "1898"
+    creator: "Thomas A. Edison, Inc. / Library of Congress"
+    page: https://www.loc.gov/item/00694211/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047124/00047124.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_teutonic:
+    kind: video
+    title: '"Teutonic" and "Nördland"'
+    date: "1902"
+    creator: "American Mutoscope and Biograph Company / Library of Congress, Paper Print Collection"
+    page: https://www.loc.gov/item/2013607062/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02007728/02007728.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+    active: [0.06, 0.02, 0.94, 0.98]
+  loc_coal_dumper:
+    kind: video
+    title: "Giant coal dumper"
+    date: "1897"
+    creator: "Thomas A. Edison, Inc. / Library of Congress"
+    page: https://www.loc.gov/item/00694215/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046906/00046906.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_fast_mail:
+    kind: video
+    title: "Fast mail, Northern Pacific R. R."
+    date: "1897"
+    creator: "Thomas A. Edison, Inc. / Library of Congress"
+    page: https://www.loc.gov/item/00694200/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047115/00047115.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_san_pedro:
+    kind: video
+    title: "Building a harbor at San Pedro"
+    date: "1901"
+    creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
+    page: https://www.loc.gov/item/00694162/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045693/00045693.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_black_diamond:
+    kind: video
+    title: "New Black Diamond Express"
+    date: "1900"
+    creator: "Thomas A. Edison, Inc. / Library of Congress, Paper Print Collection"
+    page: https://www.loc.gov/item/00694259/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064200/00064200.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+  loc_phila_express:
+    kind: video
+    title: "Philadelphia Express, Jersey Central Railway"
+    date: "1897"
+    creator: "Thomas A. Edison, Inc. / Library of Congress"
+    page: https://www.loc.gov/item/00694280/
+    url: https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047144/00047144.mp4
+    license: "No known restrictions (LOC: free to use and reuse)"
+    rights: *loc_rights
+    accessed: *acc
+
+  # ---------------------------------------------------------------- modern picture (DVIDS)
+  dv_savannah_cargo:
+    kind: video
+    title: "B-Roll - Port of Savannah, Cargo Operations"
+    date: "2023-06-28"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/891556
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2307/DOD_109788761/DOD_109788761.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_savannah_port:
+    kind: video
+    title: "B-Roll: CBP Cargo Inspections and Seaport Operations at the Port of Savannah"
+    date: "2021-07-27"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/825710
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2112/DOD_108730801/DOD_108730801.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_savannah_gate:
+    kind: video
+    title: "B-Roll: CBP Cargo Inspections at the Port of Savannah"
+    date: "2021-07-27"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/824042
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2112/DOD_108714442/DOD_108714442.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_savannah_rail:
+    kind: video
+    title: "B-roll - Port of Savannah Rail Operations, CBP NII Operations"
+    date: "2023-06-28"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/891551
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2307/DOD_109788662/DOD_109788662.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_longbeach_a:
+    kind: video
+    title: "B-Roll - Long Beach Sea Port (package 1)"
+    date: "2021-08-04"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/822441
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2111/DOD_108693783/DOD_108693783.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_longbeach_b:
+    kind: video
+    title: "B-Roll - Long Beach Sea Port (package 2)"
+    date: "2021-08-04"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/822456
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2111/DOD_108694016/DOD_108694016.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_longbeach_c:
+    kind: video
+    title: "B-Roll - Long Beach Sea Port (package 3)"
+    date: "2021-08-04"
+    creator: "U.S. Customs and Border Protection, Office of Public Affairs (via DVIDS)"
+    page: https://www.dvidshub.net/video/822461
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2111/DOD_108694070/DOD_108694070.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_container_move:
+    kind: video
+    title: "60th Aerial Port Squadron moves a shipping container during Exercise Ultimate Caduceus"
+    date: "2025-07-21"
+    creator: "60th Air Mobility Wing, U.S. Air Force (via DVIDS)"
+    page: https://www.dvidshub.net/video/971427
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2507/DOD_111169838/DOD_111169838.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_cargo_timelapse:
+    kind: video
+    title: "Cargo Operations Time-lapse"
+    date: "2019-07-09"
+    creator: "386th Air Expeditionary Wing, U.S. Air Force (via DVIDS)"
+    page: https://www.dvidshub.net/video/695702
+    url: https://d34w7g4gy10iej.cloudfront.net/video/1907/DOD_106996919/DOD_106996919-1024x576-1769k.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_pallets:
+    kind: video
+    title: "721st APS load pallets"
+    date: "2020-02-13"
+    creator: "86th Airlift Wing, U.S. Air Force (via DVIDS)"
+    page: https://www.dvidshub.net/video/740313
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2002/DOD_107690972/DOD_107690972-1024x576-1769k.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_c17_takeoff:
+    kind: video
+    title: "C-17 Takeoff B-roll"
+    date: "2022-10-31"
+    creator: "Air Force Reserve Command (via DVIDS)"
+    page: https://www.dvidshub.net/video/870315
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2301/DOD_109399147/DOD_109399147.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+  dv_c5_takeoff:
+    kind: video
+    title: "A C-5M Super Galaxy taxis and takes off during exercise Bamboo Eagle 25-3 (B-roll)"
+    date: "2025-08-03"
+    creator: "375th Air Mobility Wing, U.S. Air Force (via DVIDS)"
+    page: https://www.dvidshub.net/video/972803
+    url: https://d34w7g4gy10iej.cloudfront.net/video/2508/DOD_111213284/DOD_111213284.mp4
+    license: "Public domain (U.S. federal government work)"
+    rights: *dvids_rights
+    accessed: *acc
+
+  # ---------------------------------------------------------------- NASA picture
+  nasa_a11_70mm:
+    kind: video
+    title: "Apollo 11 launch, transfer from 70mm (KSC_69-71212)"
+    date: "1969-07-16"
+    creator: "NASA / Kennedy Space Center"
+    page: https://images.nasa.gov/details/KSC_69-71212-sRGB
+    url: https://images-assets.nasa.gov/video/KSC_69-71212-sRGB/KSC_69-71212-sRGB~orig.mp4
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+    active: [0.045, 0.045, 0.955, 0.955]
+
+  # ---------------------------------------------------------------- voices (public domain)
+  vo_jfk_rice:
+    kind: audio
+    title: "Address at Rice University on the Nation's Space Effort (audio)"
+    date: "1962-09-12"
+    creator: "President John F. Kennedy; recording from the John F. Kennedy Presidential Library and Museum (NARA)"
+    page: https://commons.wikimedia.org/wiki/File:Jfk_rice_university_we_choose_to_go_to_the_moon.ogg
+    url: https://upload.wikimedia.org/wikipedia/commons/5/50/Jfk_rice_university_we_choose_to_go_to_the_moon.ogg
+    license: "Public domain (PD-USGov: U.S. federal government work)"
+    rights: >-
+      Commons file page: license "PD-USGov" - "This work is in the public domain in the
+      United States because it is a work prepared by an officer or employee of the United
+      States Government as part of that person's official duties under the terms of Title
+      17, Chapter 1, Section 105 of the US Code." Source: "John F. Kennedy Presidential
+      Library & Museum" (a NARA presidential library). A presidential address delivered in
+      office, recorded for the White House / JFK Library - not a network broadcast copy.
+    accessed: *acc
+  vo_a11_launch:
+    kind: av
+    title: "Video - Apollo 11 Pre-Launch and Launch (Launch Control commentary, Press Site)"
+    date: "1969-07-16"
+    creator: "NASA / Kennedy Space Center (Apollo Launch Control public affairs commentary)"
+    page: https://images.nasa.gov/details/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372
+    url: "https://images-assets.nasa.gov/video/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372/KSC-19690716-MH-NAS01-0001-Apollo_11_Launch_President_Johnson_Jack_King_Narration_Press_Site-B_1372~medium.mp4"
+    segment: [3360, 3425]
+    ext: .mkv
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+
+  # ---------------------------------------------------------------- music
+  mus_rynos:
+    kind: audio
+    title: "Rynos Theme"
+    date: "2016"
+    creator: "Kevin MacLeod (incompetech.com)"
+    page: https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600016
+    url: https://incompetech.com/music/royalty-free/mp3-royaltyfree/Rynos%20Theme.mp3
+    license: "CC BY 4.0 (commercial use allowed with attribution)"
+    rights: >-
+      incompetech.com licenses: "Creative Commons - Free. No charge. Requires that you
+      credit the music." Required credit: "Rynos Theme" Kevin MacLeod (incompetech.com)
+      Licensed under Creative Commons: By Attribution 4.0 License
+      http://creativecommons.org/licenses/by/4.0/
+    accessed: *acc
+    bpm: 128.0
+    first_beat_s: 0.035
+
+  # ---------------------------------------------------------------- sound effects
+  sfx_rs25:
+    kind: av
+    title: "NASA Conducts Long Duration Hot Fire of RS-25 Certification Test (natural sound)"
+    date: "2023-03-21"
+    creator: "NASA / Stennis Space Center"
+    page: https://images.nasa.gov/details/SSC_2023-03-21_RS-25_Engine_Test
+    url: https://images-assets.nasa.gov/video/SSC_2023-03-21_RS-25_Engine_Test/SSC_2023-03-21_RS-25_Engine_Test~medium.mp4
+    segment: [5, 45]
+    ext: .mkv
+    license: "Public domain (NASA, U.S. federal government work)"
+    rights: *nasa_rights
+    accessed: *acc
+  sfx_ship_horn:
+    kind: audio
+    title: "Cruise ship Albatros ship horn"
+    date: ""
+    creator: "Wikimedia Commons contributor (CC0)"
+    page: https://commons.wikimedia.org/wiki/File:Cruise_ship_Albatros_ship_horn.ogg
+    url: https://upload.wikimedia.org/wikipedia/commons/0/07/Cruise_ship_Albatros_ship_horn.ogg
+    license: "CC0 1.0"
+    rights: *cc0_rights
+    accessed: *acc
+  sfx_steam_whistle:
+    kind: audio
+    title: "Steam Whistle at Georgia Tech"
+    date: ""
+    creator: "Wikimedia Commons contributor (CC0)"
+    page: https://commons.wikimedia.org/wiki/File:Steam_Whistle_at_Georgia_Tech.ogg
+    url: https://upload.wikimedia.org/wikipedia/commons/c/c2/Steam_Whistle_at_Georgia_Tech.ogg
+    license: "CC0 1.0"
+    rights: *cc0_rights
+    accessed: *acc
+  sfx_steam_loco:
+    kind: audio
+    title: "South Australian Railways Garratt 406 starts off"
+    date: ""
+    creator: "Wikimedia Commons contributor (CC0)"
+    page: https://commons.wikimedia.org/wiki/File:South_Australian_Railways_Garratt_406_starts_off.ogg
+    url: https://upload.wikimedia.org/wikipedia/commons/2/21/South_Australian_Railways_Garratt_406_starts_off.ogg
+    license: "CC0 1.0"
+    rights: *cc0_rights
+    accessed: *acc
