@@ -75,7 +75,7 @@ class ShotReader:
         x, y, w, h = crop_box(sw, sh, s.get("active", [0, 0, 1, 1]), W / H, cx, cy, zoom)
         self.crop = (x, y, w, h, sw, sh)
         self.push = shot.get("push", 0.0)
-        self.pan = shot.get("pan", [0.0, 0.0])
+        self.pan = shot.get("pan9" if fmt == "9x16" and "pan9" in shot else "pan", [0.0, 0.0])
         m = 1 + abs(self.push) + 2 * max(abs(self.pan[0]), abs(self.pan[1]))
         self.DW = int(round(W * m)) // 2 * 2
         self.DH = int(round(H * m)) // 2 * 2
