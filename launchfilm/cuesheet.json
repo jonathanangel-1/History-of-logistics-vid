@@ -1,5 +1,5 @@
 {
- "_doc": "Single source of truth for picture and sound. Film positions are bars (0-based, 4/4, 90 BPM: 1 bar = 2.6667 s, 1 beat = 0.6667 s) or seconds in keys ending in _s. Shot `in` is seconds in the ORIGINAL source file. c16/c9 = [center_x, center_y, zoom] of the crop inside the source's active area (zoom 1 = largest box of the output aspect). A shot runs until the next shot starts. Narration `at_s` is the onset of the first word; `split_at_s` places each item of a list read on its own beat. `blur` boxes are [x0, y0, x1, y1] source fractions, optionally moving to `to` over source seconds `t`. `pan9` overrides `pan` for the 9:16 cut.",
+ "_doc": "Single source of truth for picture and sound. Film positions are bars (0-based, 4/4, 90 BPM: 1 bar = 2.6667 s, 1 beat = 0.6667 s) or seconds in keys ending in _s. Shot `in` is seconds in the ORIGINAL source file. c16/c9 = [center_x, center_y, zoom] of the crop inside the source's active area (zoom 1 = largest box of the output aspect). A shot runs until the next shot starts. Narration `at_s` is the onset of the first word; `split_at_s` places each item of a list read on its own beat. `blur` boxes are [x0, y0, x1, y1] source fractions, optionally moving to `to` over source seconds `t`. `pan9` overrides `pan` for the 9:16 cut. A narration line's optional `tts_text` is what the voice engine reads (same words, punctuation that steers the read); `text` stays the locked script and is what every take is checked against.",
  "bpm": 90,
  "beats_per_bar": 4,
  "total_bars": 23.625,
@@ -1037,7 +1037,8 @@
      22.1,
      23.4,
      24.45
-    ]
+    ],
+    "tts_text": "Chip fabs; power plants; drone factories; drug plants; shipyards."
    },
    {
     "id": "v08",

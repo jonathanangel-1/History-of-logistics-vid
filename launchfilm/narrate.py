@@ -23,20 +23,22 @@ ENGINE_CFG = {"tts_edge": "edge", "tts_chatterbox": "chatterbox"}
 
 
 def _key(cfg, line):
-    blob = json.dumps([cfg[ENGINE_CFG[cfg["model"]]], line["text"], line.get("takes"),
+    blob = json.dumps([cfg[ENGINE_CFG[cfg["model"]]], line["text"], line.get("tts_text"), line.get("takes"),
                        line.get("exaggeration"), line.get("cfg_weight")], sort_keys=True)
     return hashlib.sha1(blob.encode()).hexdigest()[:12]
 
 
-def trim(y, sr, tail=0.2, thresh=0.05):
-    """Cut to the spoken part so a line's `at_s` is the onset of its first word."""
+def trim(y, sr, tail=0.2, thresh=0.05, onset_thresh=0.012):
+    """Cut to the spoken part so a line's `at_s` is the onset of its first word. The onset
+    threshold sits low (-38 dB re the loudest 10 ms) so a voiced B or the start of a Ch,
+    which are far quieter than the vowel after them, stay in the file."""
     fr = int(0.01 * sr)
     env = np.array([np.sqrt(np.mean(y[i:i + fr] ** 2)) for i in range(0, len(y) - fr, fr)])
-    on = np.where(env > env.max() * thresh)[0]
-    a = on[0] * fr - int(LEAD_S * sr)
+    a = np.where(env > env.max() * onset_thresh)[0][0] * fr - int(LEAD_S * sr)
+    b = (np.where(env > env.max() * thresh)[0][-1] + 1) * fr + int(tail * sr)
     if a < 0:
-        y, a = np.concatenate([np.zeros(-a), y]), 0
-    b = min(len(y), (on[-1] + 1) * fr + int(tail * sr))
+        y, a, b = np.concatenate([np.zeros(-a), y]), 0, b - a
+    b = min(len(y), b)
     y = y[a:b].copy()
     k = int(0.06 * sr)
     y[-k:] *= np.linspace(1, 0, k) ** 2
@@ -85,7 +87,7 @@ def _job(cfg, todo):
     if cfg["model"] == "tts_edge":
         return {"edge": cfg["edge"], "work_dir": str(OUT_DIR / "takes"),
                 "report_path": str(OUT_DIR / "takes_report.json"),
-                "all_lines": [{"id": l["id"], "text": l["text"]} for l in cfg["lines"]],
+                "all_lines": [{k: l[k] for k in ("id", "text", "tts_text") if k in l} for l in cfg["lines"]],
                 "lines": [dict(l, out=str(line_path(l, cfg))) for l in todo]}
     cb = cfg["chatterbox"]
     refkey = hashlib.sha1(json.dumps([cb["reference_text"], cb["reference_seed"],

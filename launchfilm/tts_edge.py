@@ -7,6 +7,8 @@ Run like a voice-over session with one narrator:
     prosody of a read, not of a sentence in isolation), once per speaking rate; each line
     is cut out of the passage at the service's own word boundaries.
   * "line" takes: each line read on its own, once per speaking rate.
+A line's optional `tts_text` is what the service reads instead of `text` (same words,
+different punctuation, to steer the read); takes are always judged against `text`.
 The kept take for a line
   1. transcribes back to exactly the script (faster-whisper), and
   2. scores best on UTMOS (automatic naturalness predictor, 1-5) among takes that pass,
@@ -31,6 +33,10 @@ FORMAT = "audio-24khz-96kbitrate-mono-mp3"
 def _norm(s):
     s = s.lower().replace("-", " ")
     return re.sub(r"[^a-z' ]", " ", s).split()
+
+
+def _read(line):
+    return line.get("tts_text", line["text"])
 
 
 def _communicate_cls():
@@ -82,7 +88,7 @@ def cut_lines(y, words, lines, sr=SR, pre=0.08, post=0.22):
     """Split a passage into lines using word boundaries (lines matched by word count)."""
     out, k = [], 0
     for li, line in enumerate(lines):
-        n = len(re.findall(r"[A-Za-z0-9']+", line["text"].replace("-", " ")))
+        n = len(re.findall(r"[A-Za-z0-9']+", _read(line).replace("-", " ")))
         seg = words[k:k + n]
         k += n
         nxt = words[k][0] if k < len(words) else len(y) / sr
@@ -128,7 +134,7 @@ def main(job_path):
     todo = {l["id"]: l for l in job["lines"]}
     takes = {lid: [] for lid in todo}
 
-    passage = " ".join(l["text"] for l in all_lines)
+    passage = " ".join(_read(l) for l in all_lines)
     for rate in cfg["session_rates"]:
         mp3 = work / f"session_{cfg['voice']}_{rate}.mp3"
         words = synth(passage, cfg["voice"], rate, mp3)
@@ -139,7 +145,7 @@ def main(job_path):
     for rate in cfg["line_rates"]:
         for lid, line in todo.items():
             mp3 = work / f"line_{lid}_{cfg['voice']}_{rate}.mp3"
-            synth(line["text"], cfg["voice"], rate, mp3)
+            synth(_read(line), cfg["voice"], rate, mp3)
             takes[lid].append({"kind": "line", "rate": rate, "y": decode(mp3)})
 
     report = []
