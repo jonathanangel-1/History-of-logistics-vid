@@ -11,8 +11,8 @@ def _pick_times(cs, n=24):
     shots = cs["shots"]
     mids = []
     for i, s in enumerate(shots):
-        t0 = cs.t(s["at"])
-        t1 = cs.t(shots[i + 1]["at"]) if i + 1 < len(shots) else cs.duration
+        t0 = cs.when(s)
+        t1 = cs.when(shots[i + 1]) if i + 1 < len(shots) else cs.duration
         mids.append((t0 + t1) / 2)
     # add type moments (closing lines, reveal, end card) and thin to n evenly
     for ti in cs["titles"]:
