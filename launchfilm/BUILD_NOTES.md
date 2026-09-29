@@ -61,7 +61,12 @@ voice_eval.py narrator screening (engine/voice candidates scored on the script)
   rates, cut out at the service's word boundaries, plus the line read alone at two rates).
   The kept take must transcribe back to exactly the script (faster-whisper `medium.en`) and
   scores best on UTMOS among takes that pass. All 15 kept takes match the script; UTMOS
-  4.22-4.45 (mean 4.41). The engine runs in the Python named by `NARRATOR_PYTHON` (it needs
+  4.24-4.53 (mean 4.44). Two fixes came out of checking the final mix, not the takes:
+  the line trim now finds the onset at -38 dB re the loudest 10 ms (it was -26 dB, which
+  shaved the voiced B off "Built for the build" so the mix read "Dilt"), and v07 has a
+  `tts_text` ("Chip fabs; power plants; ...", same words, semicolons) because Guy's
+  period-separated read gives a soft, Sh-like "Ch" that the recognizer hears as "Ship fabs"
+  next to "shipyards". The semicolon read passes at every rate, alone and over the music. The engine runs in the Python named by `NARRATOR_PYTHON` (it needs
   torch for the scoring). A recorded human read replaces any line with no code change: drop
   `narration_recorded/<line id>.wav` and re-run `--audio`.
 - **Voice choice.** `voice_eval.py` read the script with eight candidates: Edge Andrew,
@@ -148,6 +153,19 @@ themselves download directly from `videos.pexels.com`.
 ## Checks run on the delivered files
 
 `ffprobe` (codec, size, fps, duration, audio), `ebur128` loudness and true peak, a
-frame-by-frame black-frame scan, speech recognition (`medium.en`) over the final mix against
-the locked script, and review of contact sheets and stills of every shot in both formats,
-including full-resolution crops of every blurred region.
+frame-by-frame black-frame scan, speech recognition (`medium.en`) over the audio of both
+delivered MP4s against the locked script, and review of contact sheets and stills of every
+shot in both formats, including full-resolution crops of every blurred region.
+
+| check | 16:9 | 9:16 |
+|---|---|---|
+| duration | 63.000 s | 63.000 s |
+| size | 66.0 MB | 66.4 MB |
+| video / audio | H.264 High 1920x1080 24 fps / AAC 48 kHz | H.264 High 1080x1920 24 fps / AAC 48 kHz |
+| integrated loudness | -14.1 LUFS | -14.1 LUFS |
+| true peak | -1.1 dBTP | -1.1 dBTP |
+| dark frames | 56.6-63.0 s only (the end card: charcoal with type) | same |
+| speech recognition vs script | exact match | exact match |
+
+The recognizer also emits a one-word "You" at 0:59.6, over the end-card music; the voice
+stem is digital silence after 0:55, so that is a recognizer hallucination, not speech.
