@@ -77,6 +77,7 @@ def write():
         w = csv.DictWriter(f, fieldnames=list(rs[0].keys()))
         w.writeheader()
         w.writerows(rs)
+    cs = Cues()
     src = load_sources()
     lines = ["# Credits: Volume launch film (v3)", "",
              "Every clip, voice line, music cue and sound effect in the film, generated from "
